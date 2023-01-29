@@ -6,33 +6,24 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended",
         "plugin:import/recommended",
-        "plugin:jsx-ally/recommended",
         "prettier"
     ],
-    "parser": "@babel/eslint-parser",
+    "overrides": [
+    ],
     "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "requireConfigFile": false
+        "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "prettier"
+        "react"
     ],
     "rules": {
-        "prettier/prettier": "error",
-        "react/prop-types": 0,
-        "indent": [0, 4],
-        "semi": [2, "always"],
-        "space-before-function-paren": ["error", "never"],
-        "quotes": [
-            "error",
-            "double",
-            {
-                "allowTemplateLiterals": true,
-                "avoidEscape": true
-            }],
-        "multiline-ternary": ["off"]
     }
 }

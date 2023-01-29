@@ -1,6 +1,5 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import TestPage from './test';
+import { Route, Routes } from "react-router-dom";
+import TestPage from "./mainPage/index.jsx";
 
 export const Routing = () => {
     return (
