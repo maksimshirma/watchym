@@ -11,9 +11,7 @@ http.interceptors.request.use(
     async function (config) {
         if (configJSON.isFireBase) {
             const isContainSlash = /\/$/gi.test(config.url);
-            config.url =
-                (isContainSlash ? config.url.slice(0, -1) : config.url) +
-                ".json";
+            config.url = (isContainSlash ? config.url.slice(0, -1) : config.url) + ".json";
             const expiresDate = localStorageService.getExpiresDate();
             const refreshToken = localStorageService.getRefreshToken();
             if (refreshToken && expiresDate < Date.now()) {
@@ -41,9 +39,7 @@ http.interceptors.request.use(
 );
 
 const transformData = (data) => {
-    return data && !data._id
-        ? Object.keys(data).map((key) => ({ ...data[key] }))
-        : data;
+    return data && !data._id ? Object.keys(data).map((key) => ({ ...data[key] })) : data;
 };
 
 http.interceptors.response.use(
@@ -53,10 +49,7 @@ http.interceptors.response.use(
         }
     },
     function (error) {
-        const expectedErrors =
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status < 500;
+        const expectedErrors = error.response && error.response.status >= 400 && error.response.status < 500;
         if (!expectedErrors) {
             console.log(error, "Somthing was wrong. Try it later...");
         }

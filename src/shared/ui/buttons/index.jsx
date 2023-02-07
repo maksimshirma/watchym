@@ -5,13 +5,7 @@ const Buttons = ({ options }) => {
     return (
         <div>
             {options &&
-                options.map((option) => (
-                    <Button
-                        key={option.title}
-                        title={option.title}
-                        onClick={option.onClick}
-                    />
-                ))}
+                options.map((option) => <Button key={option.title} title={option.title} onClick={option.onClick} />)}
         </div>
     );
 };

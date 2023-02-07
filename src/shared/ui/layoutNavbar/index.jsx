@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const LayoutHeader = ({ children }) => {
+const LayoutNavbar = ({ children }) => {
     return (
         <div className="w-full bg-white rounded-b-xl">
             <div className="flex p-2 ">{children}</div>
@@ -8,11 +8,8 @@ const LayoutHeader = ({ children }) => {
     );
 };
 
-LayoutHeader.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-    ]),
+LayoutNavbar.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
-export default LayoutHeader;
+export default LayoutNavbar;

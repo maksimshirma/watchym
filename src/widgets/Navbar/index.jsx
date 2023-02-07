@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
-import { LayoutHeader } from "../../shared";
-import Navigation from "./ui/navigation";
+import { LayoutNavbar, NavLinks } from "../../shared";
 
 const Navbar = ({ routes }) => {
     return (
-        <LayoutHeader>
+        <LayoutNavbar>
             <div className="flex-auto">Logo</div>
-            <Navigation routes={routes} />
+            <div className="flex flex-auto">
+                <NavLinks routes={routes} />
+            </div>
             <div className="flex-auto relative">
                 <div className="absolute inset-y-0 right-0">User</div>
             </div>
-        </LayoutHeader>
+        </LayoutNavbar>
     );
 };
 

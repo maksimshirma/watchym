@@ -6,10 +6,7 @@ const StrictModeWrapper = ({ children }) => {
 };
 
 StrictModeWrapper.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-    ]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default StrictModeWrapper;

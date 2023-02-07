@@ -1,10 +1,11 @@
 import AccauntsPage from "../accauntsPage/index.jsx";
 import EditUserPage from "../editUserPage/index.jsx";
 import HistoryPage from "../historyPage/index.jsx";
-import LoginPage from "../loginPage/index.jsx";
+import SignInPage from "../signInPage/index.jsx";
 import MainPage from "../mainPage/index.jsx";
 import NotFoundPage from "../notFoundPage/index.jsx";
 import UserPage from "../userPage/index.jsx";
+import SignUpPage from "../signUpPage/index.jsx";
 
 export const routes = {
     main: {
@@ -32,10 +33,15 @@ export const routes = {
         path: "/accaunts",
         element: <AccauntsPage />,
     },
-    login: {
-        title: "Login Page",
-        path: "/login",
-        element: <LoginPage />,
+    signIn: {
+        title: "SignIn Page",
+        path: "/signIn",
+        element: <SignInPage />,
+    },
+    signUp: {
+        title: "SignUp Page",
+        path: "/signUp",
+        element: <SignUpPage />,
     },
     notFound: {
         title: "Not Found Page",

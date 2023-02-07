@@ -1,3 +1,1 @@
-import localStorageService from "./localStorage.service.js";
-
-export default localStorageService;
+export { default } from "./localStorage.service.js";

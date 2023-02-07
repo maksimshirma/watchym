@@ -6,7 +6,11 @@ export const Routing = () => {
     return (
         <Routes>
             {Object.keys(routes).map((key) => (
-                <Route key={routes[key].title} path={routes[key].path} element={<LayoutMain>{routes[key].element}</LayoutMain>} />
+                <Route
+                    key={routes[key].title}
+                    path={routes[key].path}
+                    element={<LayoutMain>{routes[key].element}</LayoutMain>}
+                />
             ))}
         </Routes>
     );

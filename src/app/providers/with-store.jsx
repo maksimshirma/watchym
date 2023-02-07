@@ -9,10 +9,7 @@ const StoreWrapper = ({ children }) => {
 };
 
 StoreWrapper.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-    ]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default StoreWrapper;

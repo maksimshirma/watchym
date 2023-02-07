@@ -4,16 +4,11 @@ const endpoint = "user/";
 
 const userService = {
     get: async () => {
-        const { data } = await httpService.get(
-            endpoint + localStorageService.getUserId()
-        );
+        const { data } = await httpService.get(endpoint + localStorageService.getUserId());
         return data;
     },
     create: async (payload) => {
-        const { data } = await httpService.post(
-            endpoint + payload._id,
-            payload
-        );
+        const { data } = await httpService.post(endpoint + payload._id, payload);
         return data;
     },
     edit: async (payload) => {

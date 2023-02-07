@@ -12,8 +12,7 @@
         "plugin:import/recommended",
         "prettier"
     ],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -21,21 +20,26 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
         "indent": ["error", 4],
         "semi": [2, "always"],
-        "space-before-function-paren": ["error", {
-            "anonymous": "always",
-            "named": "never",
-            "asyncArrow": "always"
-        }],
-        "quotes": ["error", "double", {
-            "avoidEscape": true,
-            "allowTemplateLiterals": true
-        }],
-        "max-len": [1, {"code": 80}]
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        "quotes": [
+            "error",
+            "double",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "max-len": [1, { "code": 120 }]
     }
 }

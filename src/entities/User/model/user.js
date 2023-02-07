@@ -104,9 +104,7 @@ export const signUp =
                 createUser({
                     _id: data.localId,
                     email,
-                    image: `https://avatars.dicebear.com/api/avataaars/${(
-                        Math.random() + 1
-                    )
+                    image: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1)
                         .toString(36)
                         .substring(7)}.svg`,
                     accounts: [],
