@@ -35,6 +35,7 @@
         "quotes": ["error", "double", {
             "avoidEscape": true,
             "allowTemplateLiterals": true
-        }]
+        }],
+        "max-len": [1, {"code": 80}]
     }
 }

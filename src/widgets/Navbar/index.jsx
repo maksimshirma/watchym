@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import LayoutHeader from "../../shared/ui/layoutHeader/Layout.Header.jsx";
+import { LayoutHeader } from "../../shared";
 import Navigation from "./ui/navigation";
 
 const Navbar = ({ routes }) => {

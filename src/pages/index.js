@@ -1,2 +1,2 @@
-export { routes } from "./routes.js";
-export { Routing } from "./index.jsx";
+export { routes } from "./routing";
+export { Routing } from "./routing";

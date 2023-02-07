@@ -1,9 +1,10 @@
-import AccauntsPage from "./accauntsPage/index.jsx";
-import EditUserPage from "./editUserPage/index.jsx";
-import HistoryPage from "./historyPage/index.jsx";
-import MainPage from "./mainPage/index.jsx";
-import NotFoundPage from "./NotFoundPage/index.jsx";
-import UserPage from "./userPage/index.jsx";
+import AccauntsPage from "../accauntsPage/index.jsx";
+import EditUserPage from "../editUserPage/index.jsx";
+import HistoryPage from "../historyPage/index.jsx";
+import LoginPage from "../loginPage/index.jsx";
+import MainPage from "../mainPage/index.jsx";
+import NotFoundPage from "../notFoundPage/index.jsx";
+import UserPage from "../userPage/index.jsx";
 
 export const routes = {
     main: {
@@ -30,6 +31,11 @@ export const routes = {
         title: "Accaunts Page",
         path: "/accaunts",
         element: <AccauntsPage />,
+    },
+    login: {
+        title: "Login Page",
+        path: "/login",
+        element: <LoginPage />,
     },
     notFound: {
         title: "Not Found Page",

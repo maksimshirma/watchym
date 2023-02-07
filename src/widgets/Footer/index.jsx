@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import LayoutFooter from "../../shared/ui/layoutFooter/Layout.Footer.jsx";
+import { LayoutFooter } from "../../shared";
 
 const Footer = () => {
     return (

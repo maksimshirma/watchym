@@ -1,15 +1,16 @@
 import "./index.scss";
 import { Routing, routes } from "../pages";
 import { Navbar, Footer } from "../widgets";
+import ProvidersWrapper from "./providers/index.jsx";
 
-function App() {
-    return (
-        <div className="app">
+const App = () => (
+    <div className="app">
+        <ProvidersWrapper>
             <Navbar routes={routes} />
             <Routing />
             <Footer />
-        </div>
-    );
-}
+        </ProvidersWrapper>
+    </div>
+);
 
 export default App;
