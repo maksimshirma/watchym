@@ -40,6 +40,6 @@
                 "allowTemplateLiterals": true
             }
         ],
-        "max-len": [1, { "code": 120 }]
+        "max-len": [1, { "code": 120, "ignoreStrings": true }]
     }
 }

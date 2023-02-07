@@ -1,4 +1,4 @@
-import { NavLinks, Button, Buttons, LayoutFooter, LayoutNavbar, LayoutMain, PageHeader } from "./ui";
+import { NavLinks, Button, Buttons, LayoutFooter, LayoutNavbar, LayoutMain, PageHeader, TextField } from "./ui";
 import { httpService, localStorageService, authService } from "./api";
 import config from "./config/config.json";
 
@@ -10,6 +10,7 @@ export {
     Button,
     PageHeader,
     Buttons,
+    TextField,
     httpService,
     localStorageService,
     authService,

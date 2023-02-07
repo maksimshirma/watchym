@@ -29,8 +29,8 @@ export const userSlice = createSlice({
         userRequested: (state) => {
             state.isLoading = true;
         },
-        userRequestSuccessed: (state, action) => {
-            state.auth = action.payload;
+        userReceved: (state, action) => {
+            state.entities = action.payload;
             state.isLoggedIn = true;
             state.isLoading = false;
             state.dataLoaded = true;
@@ -39,7 +39,7 @@ export const userSlice = createSlice({
             state.error = action.payload;
             state.dataLoaded = false;
         },
-        authRequest: (state) => {
+        authRequested: (state) => {
             state.error = null;
         },
         authRequestSuccessed: (state, action) => {
@@ -52,7 +52,7 @@ export const userSlice = createSlice({
         userCreated: (state, action) => {
             state.entities = action.payload;
         },
-        userLoggedOut: (state) => {
+        userSignedOut: (state) => {
             state.entities = null;
             state.isLoggedIn = false;
             state.auth = null;
@@ -67,12 +67,12 @@ export const userSlice = createSlice({
 const { reducer: userReducer, actions } = userSlice;
 const {
     userRequested,
-    userRequestSuccessed,
+    userReceved,
     userRequestFailed,
-    authRequestSuccess,
-    authRequestedFailed,
+    authRequestSuccessed,
+    authRequestFailed,
     userCreated,
-    userLoggedOut,
+    userSignedOut,
     userUpdated,
     authRequested,
 } = actions;
@@ -99,7 +99,7 @@ export const signUp =
         try {
             const data = await authService.register({ email, password });
             localStorageService.setTokens(data);
-            dispatch(authRequestSuccess({ userId: data.localId }));
+            dispatch(authRequestSuccessed({ userId: data.localId }));
             dispatch(
                 createUser({
                     _id: data.localId,
@@ -112,10 +112,41 @@ export const signUp =
                 })
             );
         } catch (error) {
-            dispatch(authRequestedFailed(error.message));
+            dispatch(authRequestFailed(error.message));
         }
     };
 
-export const getUser = () => (state) => state.users.entities;
+export const signIn =
+    ({ email, password }) =>
+    async (dispatch) => {
+        dispatch(authRequested());
+        try {
+            const data = await authService.login({ email, password });
+            localStorageService.setTokens(data);
+            dispatch(authRequestSuccessed({ userId: data.localId }));
+        } catch (error) {
+            dispatch(authRequestFailed(error.message));
+        }
+    };
+
+export const signOut = () => (dispatch) => {
+    localStorageService.removeAuthData();
+    dispatch(userSignedOut());
+};
+
+export const loadUser = () => async (dispatch) => {
+    dispatch(userRequested());
+    try {
+        const data = await userService.get();
+        dispatch(userReceved(data));
+    } catch (error) {
+        dispatch(userRequestFailed());
+        console.log(error.message);
+    }
+};
+
+export const getUser = () => (state) => state.user.entities;
+export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
+export const getDataStatus = () => (state) => state.user.dataLoaded;
 
 export default userReducer;

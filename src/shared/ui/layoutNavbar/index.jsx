@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const LayoutNavbar = ({ children }) => {
     return (
         <div className="w-full bg-white rounded-b-xl">
-            <div className="flex p-2 ">{children}</div>
+            <div className="flex p-2 items-center">{children}</div>
         </div>
     );
 };

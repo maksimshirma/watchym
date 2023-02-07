@@ -5,5 +5,6 @@ import LayoutFooter from "./layoutFooter";
 import LayoutNavbar from "./layoutNavbar";
 import LayoutMain from "./layoutMain";
 import PageHeader from "./pageHeader";
+import TextField from "./textField";
 
-export { NavLinks, Button, Buttons, LayoutFooter, LayoutNavbar, LayoutMain, PageHeader };
+export { NavLinks, Button, Buttons, LayoutFooter, LayoutNavbar, LayoutMain, PageHeader, TextField };

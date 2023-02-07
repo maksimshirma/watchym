@@ -23,7 +23,7 @@ http.interceptors.request.use(
                     localId: data.user_id,
                 });
             }
-            const accesToken = localStorageService.getAaccesToken();
+            const accesToken = localStorageService.getAccessToken();
             if (accesToken) {
                 config.params = {
                     ...config.params,
@@ -45,8 +45,9 @@ const transformData = (data) => {
 http.interceptors.response.use(
     (response) => {
         if (configJSON.isFireBase) {
-            response.data = { content: transformData(response.data) };
+            response.data.content = transformData(response.data.content);
         }
+        return response;
     },
     function (error) {
         const expectedErrors = error.response && error.response.status >= 400 && error.response.status < 500;

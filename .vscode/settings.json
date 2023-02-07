@@ -5,6 +5,12 @@
             "source.fixAll": true,
         },
     },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+        },
+    },
     "editor.formatOnSave": true,
     "prettier.requireConfig": true
 }

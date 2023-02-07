@@ -6,6 +6,7 @@ import MainPage from "../mainPage/index.jsx";
 import NotFoundPage from "../notFoundPage/index.jsx";
 import UserPage from "../userPage/index.jsx";
 import SignUpPage from "../signUpPage/index.jsx";
+import AnalyticsPage from "../analyticsPage/index.jsx";
 
 export const routes = {
     main: {
@@ -22,6 +23,11 @@ export const routes = {
         title: "Edit User Page",
         path: "/user/:edit",
         element: <EditUserPage />,
+    },
+    analytics: {
+        title: "Analytics Page",
+        path: "/",
+        element: <AnalyticsPage />,
     },
     history: {
         title: "History Page",
