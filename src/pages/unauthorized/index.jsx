@@ -1,6 +1,6 @@
 import { Unauthorized } from "../../widgets";
 
-const MainPage = () => {
+const UnauthorizedPage = () => {
     return (
         <div className="h-full w-full">
             <Unauthorized />
@@ -8,4 +8,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default UnauthorizedPage;

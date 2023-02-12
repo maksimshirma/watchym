@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { userReducer } from "../../entities";
+import { userReducer, accountsReducer } from "../../entities";
 
 const rootReducer = combineReducers({
     user: userReducer,
+    accounts: accountsReducer,
 });
 
 export function createStore() {

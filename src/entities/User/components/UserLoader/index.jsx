@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser, getDataStatus } from "../../model";
+import { loadUser, getUserDataStatus } from "../../model";
 
 const UserLoader = ({ children }) => {
     const dispatch = useDispatch();
-    const dataStatus = useSelector(getDataStatus());
+    const dataStatus = useSelector(getUserDataStatus());
     useEffect(() => {
         if (!dataStatus) {
             dispatch(loadUser());
         }
-    }, []);
+    }, [dispatch, dataStatus]);
     return children;
 };
 

@@ -1,56 +1,56 @@
 import AccauntsPage from "../accauntsPage/index.jsx";
-import EditUserPage from "../editUserPage/index.jsx";
+import SettingsPage from "../settingsPage/index.jsx";
 import HistoryPage from "../historyPage/index.jsx";
 import SignInPage from "../signInPage/index.jsx";
-import MainPage from "../mainPage/index.jsx";
+import UnauthorizedPage from "../unauthorized/index.jsx";
 import NotFoundPage from "../notFoundPage/index.jsx";
-import UserPage from "../userPage/index.jsx";
 import SignUpPage from "../signUpPage/index.jsx";
 import AnalyticsPage from "../analyticsPage/index.jsx";
+import SignOutPage from "../signOutPage/index.jsx";
 
 export const routes = {
-    main: {
-        title: "Main Page",
+    unauthorized: {
+        title: "Главная",
         path: "/",
-        element: <MainPage />,
+        element: <UnauthorizedPage />,
     },
-    user: {
-        title: "User Page",
-        path: "/user",
-        element: <UserPage />,
-    },
-    editUser: {
-        title: "Edit User Page",
+    settings: {
+        title: "Редактировать профиль",
         path: "/user/:edit",
-        element: <EditUserPage />,
+        element: <SettingsPage />,
     },
     analytics: {
-        title: "Analytics Page",
-        path: "/",
+        title: "Аналитика",
+        path: "/analytics",
         element: <AnalyticsPage />,
     },
     history: {
-        title: "History Page",
+        title: "Операции",
         path: "/history",
         element: <HistoryPage />,
     },
     accaunts: {
-        title: "Accaunts Page",
+        title: "Счета",
         path: "/accaunts",
         element: <AccauntsPage />,
     },
     signIn: {
-        title: "SignIn Page",
+        title: "Вход",
         path: "/signIn",
         element: <SignInPage />,
     },
     signUp: {
-        title: "SignUp Page",
+        title: "Регистрация",
         path: "/signUp",
         element: <SignUpPage />,
     },
+    signOut: {
+        title: "Выход",
+        path: "/signOut",
+        element: <SignOutPage />,
+    },
     notFound: {
-        title: "Not Found Page",
+        title: "Страница не найдена",
         path: "*",
         element: <NotFoundPage />,
     },

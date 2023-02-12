@@ -17,7 +17,7 @@ const TextField = ({ label, type, name, value, onChange }) => {
     return (
         <div className="m-2">
             <label htmlFor={name}>{label}</label>
-            <div className="flex h-6 w-96 border-b-2 border-black">
+            <div className="flex h-6 border-b-2 border-black">
                 <input
                     id={name}
                     name={name}

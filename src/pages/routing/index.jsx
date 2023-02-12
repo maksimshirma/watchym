@@ -1,38 +1,27 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { routes } from "./routes.js";
 import { LayoutMain } from "../../shared";
-import { useSelector } from "react-redux";
-import { getIsLoggedIn, UserLoader } from "../../entities";
+import { getIsLoggedIn } from "../../entities";
+
+const ProtectedLoggedInRoutes = () => {
+    const isLoggedIn = useSelector(getIsLoggedIn());
+    return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+};
+
+const ProtectedLoggedOutRoutes = () => {
+    const isLoggedIn = useSelector(getIsLoggedIn());
+    return !isLoggedIn ? <Outlet /> : <Navigate to="/analytics" />;
+};
 
 export const Routing = () => {
-    const isLoggedIn = useSelector(getIsLoggedIn());
-    if (isLoggedIn) {
-        return (
-            <Routes>
-                {Object.keys(routes).map((key) => {
-                    if (key !== "signUp" && key !== "signIn" && key !== "main") {
-                        return (
-                            <Route
-                                key={routes[key].title}
-                                path={routes[key].path}
-                                element={
-                                    <LayoutMain>
-                                        <UserLoader>{routes[key].element}</UserLoader>
-                                    </LayoutMain>
-                                }
-                            />
-                        );
-                    }
-                })}
-            </Routes>
-        );
-    } else {
-        return (
-            <Routes>
+    return (
+        <Routes>
+            <Route element={<ProtectedLoggedOutRoutes />}>
                 <Route
-                    key={routes.main.title}
-                    path={routes.main.path}
-                    element={<LayoutMain>{routes.main.element}</LayoutMain>}
+                    key={routes.unauthorized.title}
+                    path={routes.unauthorized.path}
+                    element={<LayoutMain>{routes.unauthorized.element}</LayoutMain>}
                 />
                 <Route
                     key={routes.signIn.title}
@@ -44,7 +33,20 @@ export const Routing = () => {
                     path={routes.signUp.path}
                     element={<LayoutMain>{routes.signUp.element}</LayoutMain>}
                 />
-            </Routes>
-        );
-    }
+            </Route>
+            <Route element={<ProtectedLoggedInRoutes />}>
+                {Object.keys(routes).map((key) => {
+                    if (key !== "signUp" && key !== "signIn" && key !== "unauthorized") {
+                        return (
+                            <Route
+                                key={routes[key].title}
+                                path={routes[key].path}
+                                element={<LayoutMain>{routes[key].element}</LayoutMain>}
+                            />
+                        );
+                    }
+                })}
+            </Route>
+        </Routes>
+    );
 };

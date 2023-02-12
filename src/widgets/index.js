@@ -1,7 +1,6 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Unauthorized from "./Unauthorized";
-import RegistrationForm from "./RegistrationForm";
-import AuthorizationForm from "./AuthorizationForm";
-
-export { Navbar, Footer, Unauthorized, RegistrationForm, AuthorizationForm };
+export { default as Navbar } from "./Navbar";
+export { default as Footer } from "./Footer";
+export { default as Unauthorized } from "./Unauthorized";
+export { default as RegistrationForm } from "./RegistrationForm";
+export { default as AuthorizationForm } from "./AuthorizationForm";
+export { default as Accounts } from "./Accounts";

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navigation = ({ routes }) => {
     return (
-        <>
+        <div className="flex">
             {routes &&
                 Object.keys(routes).map((key) => {
                     if (key !== "user" && key !== "editUser" && key !== "notFound")
@@ -13,7 +13,7 @@ const Navigation = ({ routes }) => {
                             </Link>
                         );
                 })}
-        </>
+        </div>
     );
 };
 

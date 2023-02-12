@@ -1,6 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { authService, localStorageService } from "../../../shared";
-import userService from "../api/user.service";
+import { authService, localStorageService, history } from "../../../shared";
+import userService from "../api";
 
 const accessToken = localStorageService.getAccessToken();
 
@@ -37,6 +37,7 @@ export const userSlice = createSlice({
         },
         userRequestFailed: (state, action) => {
             state.error = action.payload;
+            state.isLoading = false;
             state.dataLoaded = false;
         },
         authRequested: (state) => {
@@ -140,13 +141,12 @@ export const loadUser = () => async (dispatch) => {
         const data = await userService.get();
         dispatch(userReceved(data));
     } catch (error) {
-        dispatch(userRequestFailed());
-        console.log(error.message);
+        dispatch(userRequestFailed(error.message));
     }
 };
 
 export const getUser = () => (state) => state.user.entities;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
-export const getDataStatus = () => (state) => state.user.dataLoaded;
+export const getUserDataStatus = () => (state) => state.user.dataLoaded;
 
 export default userReducer;

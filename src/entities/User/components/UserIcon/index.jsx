@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
-import { getUser, getDataStatus } from "../../model";
+import PropTypes from "prop-types";
 
-const UserIcon = () => {
-    const user = useSelector(getUser());
-    const dataStatus = useSelector(getDataStatus());
-    if (dataStatus) return <img className="h-10 rounded-full border-[1px] border-black" src={user.image} alt="" />;
-    return null;
+const UserIcon = ({ image }) => {
+    return <img className="h-full w-full rounded-full border-[1px] border-black" src={image} alt="#" />;
+};
+
+UserIcon.propTypes = {
+    image: PropTypes.string,
 };
 
 export default UserIcon;

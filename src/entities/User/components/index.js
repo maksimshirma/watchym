@@ -1,4 +1,5 @@
-import UserIcon from "./UserIcon";
+import UserNavProfile from "./UserNavProfile";
 import UserLoader from "./UserLoader";
+import UserCard from "./UserCard";
 
-export { UserIcon, UserLoader };
+export { UserNavProfile, UserLoader, UserCard };

@@ -16,7 +16,7 @@ const AuthorizationForm = () => {
         dispatch(signIn(data));
     };
     return (
-        <div className="">
+        <div>
             <TextField
                 type={"text"}
                 label={"Введите email..."}

@@ -1,5 +1,14 @@
+import { Accounts } from "../../widgets";
+
 const AccauntsPage = () => {
-    return <div>Accaunts Page</div>;
+    return (
+        <>
+            Accaunts Page
+            <div className="m-1">
+                <Accounts />
+            </div>
+        </>
+    );
 };
 
 export default AccauntsPage;

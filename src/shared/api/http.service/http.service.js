@@ -45,7 +45,7 @@ const transformData = (data) => {
 http.interceptors.response.use(
     (response) => {
         if (configJSON.isFireBase) {
-            response.data.content = transformData(response.data.content);
+            response.data = transformData(response.data);
         }
         return response;
     },
