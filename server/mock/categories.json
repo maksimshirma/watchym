@@ -1,0 +1,27 @@
+[
+    {
+      "_id": "67rdca3eeb7f6fgeed471198",
+      "name": "Разное",
+      "color": "#d1dbd5"
+    },
+    {
+      "_id": "67rdca3eeb7f6fgeed471100",
+      "name": "Транспорт",
+      "color": "#c5cf91"
+    },
+    {
+      "_id": "67rdca3eeb7f6fgeed4711012",
+      "name": "Здоровье",
+      "color": "#16db65"
+    },
+    {
+      "_id": "67rdca3eeb7f6fgeed471101",
+      "name": "Одежда",
+      "color": "#538bbb"
+    },
+    {
+      "_id": "67rdca3eeb7f6fgeed471102",
+      "name": "Продукты",
+      "color": "#43f900"
+    }
+]
