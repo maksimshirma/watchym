@@ -5,7 +5,6 @@ export function changeRoutesWithIsLoggedIn(routes, isLoggedIn) {
         newRoutes.editUser = routes.editUser;
         newRoutes.analytics = routes.analytics;
         newRoutes.history = routes.history;
-        newRoutes.accaunts = routes.accaunts;
         newRoutes.notFound = routes.notFound;
     } else {
         newRoutes.main = routes.main;

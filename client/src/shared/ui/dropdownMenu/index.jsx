@@ -1,19 +1,20 @@
+import { Children } from "react";
 import PropTypes from "prop-types";
 import { Menu, Item } from "./ui";
-import { nanoid } from "nanoid";
 
-const DropdownMenu = ({ items }) => {
+const DropdownMenu = ({ children }) => {
+    const items = Children.toArray(children);
     return (
         <Menu>
-            {items.map((item) => (
-                <Item key={nanoid()}>{item.element}</Item>
+            {items.map((item, i) => (
+                <Item key={i}>{item}</Item>
             ))}
         </Menu>
     );
 };
 
 DropdownMenu.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default DropdownMenu;

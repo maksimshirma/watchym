@@ -1,9 +1,10 @@
 import { Accounts } from "../../widgets";
+import { PageHeader } from "../../shared";
 
 const AccauntsPage = () => {
     return (
         <>
-            Accaunts Page
+            <PageHeader>Мои счета</PageHeader>
             <div className="m-1">
                 <Accounts />
             </div>

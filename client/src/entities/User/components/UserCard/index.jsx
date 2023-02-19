@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { getUser } from "../../model";
+import { userModel } from "../../model";
 import UserIcon from "../UserIcon";
 
 const UserCard = () => {
-    const user = useSelector(getUser());
+    const user = useSelector(userModel.getUser());
     return (
         <div className="w-1/4 text-center bg-slate-400 rounded-lg">
             <div className="p-2">

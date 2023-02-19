@@ -1,17 +1,22 @@
 import "./index.scss";
 import { Routing, routes } from "../pages";
-import { Navbar, Footer } from "../widgets";
+import { Navbar, Modal, Accounts } from "../widgets";
 import ProvidersWrapper from "./providers/index.jsx";
-import { Container } from "../shared";
+import { LayoutMain, LayoutNavbar, Container } from "../shared";
 
 const App = () => (
-    <Container>
-        <ProvidersWrapper>
-            <Navbar routes={routes} />
-            <Routing />
-            <Footer />
-        </ProvidersWrapper>
-    </Container>
+    <ProvidersWrapper>
+        <Container>
+            <LayoutNavbar>
+                <Navbar routes={routes} />
+            </LayoutNavbar>
+            <LayoutMain>
+                <Accounts />
+                <Routing />
+            </LayoutMain>
+        </Container>
+        <Modal />
+    </ProvidersWrapper>
 );
 
 export default App;

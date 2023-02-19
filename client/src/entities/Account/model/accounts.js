@@ -29,7 +29,7 @@ export const accountsSlice = createSlice({
             }
             state.entities.push(action.payload);
         },
-        accoutnUpdated: (state, action) => {
+        accountUpdated: (state, action) => {
             state.entities = state.entities.map((account) =>
                 account._id === action.payload._id ? action.payload : account
             );
@@ -40,8 +40,8 @@ export const accountsSlice = createSlice({
     },
 });
 
-const { reducer: accountsReducer, actions } = accountsSlice;
-const { accountsRequested, accountsReceved, accountsRequestFailed, accountCreated, accoutnUpdated, accountDeleted } =
+const { actions } = accountsSlice;
+const { accountsRequested, accountsReceved, accountsRequestFailed, accountCreated, accountUpdated, accountDeleted } =
     actions;
 
 const accountCreateRequested = createAction("accounts/accountCreateRequested");
@@ -75,7 +75,7 @@ export const updateAccount = (payload) => async (dispatch) => {
     dispatch(accountUpdateRequested());
     try {
         const content = await accountsService.update(payload);
-        dispatch(accoutnUpdated(content));
+        dispatch(accountUpdated(content));
     } catch (error) {
         dispatch(accountUpdateFailed());
     }
@@ -101,4 +101,4 @@ export const getAccountById = (id) => (state) => {
     }
     return null;
 };
-export default accountsReducer;
+export const accountsReducer = accountsSlice.reducer;

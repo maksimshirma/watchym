@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadAccountsList, getAccountsDataStatus } from "../../model";
+import { accountsModel } from "../../model";
 
 const AccountsLoader = ({ children }) => {
     const dispatch = useDispatch();
-    const dataStatus = useSelector(getAccountsDataStatus());
+    const dataStatus = useSelector(accountsModel.getAccountsDataStatus());
     useEffect(() => {
         if (!dataStatus) {
-            dispatch(loadAccountsList());
+            dispatch(accountsModel.loadAccountsList());
         }
     }, [dispatch, dataStatus]);
     return children;

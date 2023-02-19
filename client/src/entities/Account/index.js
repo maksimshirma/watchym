@@ -1,10 +1,2 @@
-export {
-    accountsReducer,
-    loadAccountsList,
-    createAccount,
-    deleteAccount,
-    getAccountsList,
-    getAccountById,
-    getAccountsDataStatus,
-} from "./model";
-export { AccountsLoader, AccountsList, AccountForm } from "./componets";
+export { accountsModel } from "./model";
+export { AccountsLoader, AccountsList } from "./componets";

@@ -1,5 +1,13 @@
+import { PageHeader } from "../../shared";
+import { Operations } from "../../widgets";
+
 const HistoryPage = () => {
-    return <div>History Page</div>;
+    return (
+        <div>
+            <PageHeader>Мои операции</PageHeader>
+            <Operations />
+        </div>
+    );
 };
 
 export default HistoryPage;

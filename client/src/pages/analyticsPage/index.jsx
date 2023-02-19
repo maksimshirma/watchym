@@ -1,5 +1,11 @@
+import { PageHeader } from "../../shared";
+
 const AnalyticsPage = () => {
-    return <div>Analytics Page</div>;
+    return (
+        <div>
+            <PageHeader>Аналитика</PageHeader>
+        </div>
+    );
 };
 
 export default AnalyticsPage;

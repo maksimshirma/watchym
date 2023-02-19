@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField, Button } from "../../shared";
 import { useDispatch } from "react-redux";
-import { signIn } from "../../entities";
+import { userModel } from "../../entities";
 
 const AuthorizationForm = () => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const AuthorizationForm = () => {
         setData((prevState) => ({ ...prevState, [name]: value }));
     };
     const handleSubmit = () => {
-        dispatch(signIn(data));
+        dispatch(userModel.signIn(data));
     };
     return (
         <div>

@@ -1,43 +1,22 @@
 import PropTypes from "prop-types";
 import Account from "../Account";
-import AccountForm from "../AccountForm";
+import { accountsModel } from "../../model";
+import { useSelector } from "react-redux";
 
-const AccountsList = ({ accounts, editAccountId, onDelete, toggleEdit }) => {
-    return (
-        <>
-            {accounts &&
-                accounts.map((account) => {
-                    if (editAccountId !== account._id)
-                        return (
-                            <Account
-                                key={account._id}
-                                _id={account._id}
-                                name={account.name}
-                                number={account.number}
-                                amount={account.amount}
-                                toggleEdit={toggleEdit}
-                                onDelete={onDelete}
-                            />
-                        );
-                    return (
-                        <AccountForm
-                            key={account._id}
-                            type={"edit"}
-                            account={account}
-                            toggleEdit={toggleEdit}
-                            editAccountId={editAccountId}
-                        />
-                    );
-                })}
-        </>
-    );
+const AccountsList = ({ onEdit }) => {
+    const accounts = useSelector(accountsModel.getAccountsList());
+    const dataStatus = useSelector(accountsModel.getAccountsDataStatus());
+    if (dataStatus)
+        return (
+            <>
+                {accounts && accounts.map((account) => <Account key={account._id} _id={account._id} onEdit={onEdit} />)}
+            </>
+        );
+    return null;
 };
 
 AccountsList.propTypes = {
-    accounts: PropTypes.arrayOf(PropTypes.object),
-    editAccountId: PropTypes.string,
-    onDelete: PropTypes.func,
-    toggleEdit: PropTypes.func,
+    onEdit: PropTypes.func,
 };
 
 export default AccountsList;

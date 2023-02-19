@@ -1,26 +1,27 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { authService, localStorageService, history } from "../../../shared";
+import { authService, localStorageService } from "../../../shared";
 import userService from "../api";
 
 const accessToken = localStorageService.getAccessToken();
 
+// prettier-ignore
 const initialState = accessToken
     ? {
-          entities: null,
-          isLoading: true,
-          error: null,
-          auth: { userId: accessToken },
-          isLoggedIn: true,
-          dataLoaded: false,
-      }
+        entities: null,
+        isLoading: true,
+        error: null,
+        auth: { userId: accessToken },
+        isLoggedIn: true,
+        dataLoaded: false,
+    }
     : {
-          entities: null,
-          isLoading: false,
-          error: null,
-          auth: null,
-          isLoggedIn: false,
-          dataLoaded: false,
-      };
+        entities: null,
+        isLoading: false,
+        error: null,
+        auth: null,
+        isLoggedIn: false,
+        dataLoaded: false,
+    };
 
 export const userSlice = createSlice({
     name: "user",
@@ -65,7 +66,7 @@ export const userSlice = createSlice({
     },
 });
 
-const { reducer: userReducer, actions } = userSlice;
+const { actions } = userSlice;
 const {
     userRequested,
     userReceved,
@@ -74,14 +75,14 @@ const {
     authRequestFailed,
     userCreated,
     userSignedOut,
-    userUpdated,
+    // userUpdated,
     authRequested,
 } = actions;
 
 const userCreateRequested = createAction("users/userCreateRequested");
 const userCreateFailed = createAction("users/userCreateFailed");
-const userUpdateRequested = createAction("users/userUpdateRequested");
-const userUpdateFailed = createAction("users/userUpdateFailed");
+// const userUpdateRequested = createAction("users/userUpdateRequested");
+// const userUpdateFailed = createAction("users/userUpdateFailed");
 
 const createUser = (payload) => async (dispatch) => {
     dispatch(userCreateRequested());
@@ -93,42 +94,43 @@ const createUser = (payload) => async (dispatch) => {
     }
 };
 
+// prettier-ignore
 export const signUp =
     ({ email, password, ...rest }) =>
-    async (dispatch) => {
-        dispatch(authRequested());
-        try {
-            const data = await authService.register({ email, password });
-            localStorageService.setTokens(data);
-            dispatch(authRequestSuccessed({ userId: data.localId }));
-            dispatch(
-                createUser({
-                    _id: data.localId,
-                    email,
-                    image: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1)
-                        .toString(36)
-                        .substring(7)}.svg`,
-                    accounts: [],
-                    ...rest,
-                })
-            );
-        } catch (error) {
-            dispatch(authRequestFailed(error.message));
-        }
-    };
+        async (dispatch) => {
+            dispatch(authRequested());
+            try {
+                const data = await authService.register({ email, password });
+                localStorageService.setTokens(data);
+                dispatch(authRequestSuccessed({ userId: data.localId }));
+                dispatch(
+                    createUser({
+                        _id: data.localId,
+                        email,
+                        image: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1)
+                            .toString(36)
+                            .substring(7)}.svg`,
+                        ...rest,
+                    })
+                );
+            } catch (error) {
+                dispatch(authRequestFailed(error.message));
+            }
+        };
 
+// prettier-ignore
 export const signIn =
     ({ email, password }) =>
-    async (dispatch) => {
-        dispatch(authRequested());
-        try {
-            const data = await authService.login({ email, password });
-            localStorageService.setTokens(data);
-            dispatch(authRequestSuccessed({ userId: data.localId }));
-        } catch (error) {
-            dispatch(authRequestFailed(error.message));
-        }
-    };
+        async (dispatch) => {
+            dispatch(authRequested());
+            try {
+                const data = await authService.login({ email, password });
+                localStorageService.setTokens(data);
+                dispatch(authRequestSuccessed({ userId: data.localId }));
+            } catch (error) {
+                dispatch(authRequestFailed(error.message));
+            }
+        };
 
 export const signOut = () => (dispatch) => {
     localStorageService.removeAuthData();
@@ -149,4 +151,4 @@ export const getUser = () => (state) => state.user.entities;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getUserDataStatus = () => (state) => state.user.dataLoaded;
 
-export default userReducer;
+export const userReducer = userSlice.reducer;

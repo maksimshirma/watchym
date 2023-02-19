@@ -1,46 +1,32 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AccountsList, AccountForm, getAccountsDataStatus, deleteAccount, getAccountsList } from "../../entities";
-import { Button } from "../../shared";
+import { AccountsList, accountsModel } from "../../entities";
+import { AddAccountIcon } from "../../shared";
+import { EditAccountForm, CreateAccountForm, modalModel } from "../../features";
 
 const Accounts = () => {
-    const [editAccountId, setEditAccountId] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const accounts = useSelector(getAccountsList());
-    const dataLoaded = useSelector(getAccountsDataStatus());
+    const dataLoaded = useSelector(accountsModel.getAccountsDataStatus());
 
     const handleDelete = (id) => {
-        dispatch(deleteAccount(id));
+        dispatch(accountsModel.deleteAccount(id));
     };
 
-    const toggleEdit = (id) => {
-        if (!editAccountId) {
-            setEditAccountId(id);
-        } else {
-            setEditAccountId(null);
-        }
+    const handleCreate = () => {
+        dispatch(modalModel.handleOpenModal(<CreateAccountForm />));
     };
 
-    const toggleOpen = () => {
-        setIsOpen((prevState) => !prevState);
+    const handleEdit = (id) => {
+        dispatch(modalModel.handleOpenModal(<EditAccountForm _id={id} />));
     };
 
     if (dataLoaded) {
         return (
-            <>
-                <AccountsList
-                    accounts={accounts}
-                    editAccountId={editAccountId}
-                    onDelete={handleDelete}
-                    toggleEdit={toggleEdit}
-                />
-                {!isOpen ? (
-                    <Button title={"Добавить"} onClick={toggleOpen} />
-                ) : (
-                    <AccountForm type={"create"} toggleOpen={toggleOpen} />
-                )}
-            </>
+            <div className="m-1">
+                <p className="text-2xl">Мои счета</p>
+                <AccountsList onDelete={handleDelete} onEdit={handleEdit} />
+                <p className="text-2xl">Добавить счёт</p>
+                <AddAccountIcon onCreate={handleCreate} />
+            </div>
         );
     }
     return "Loading...";

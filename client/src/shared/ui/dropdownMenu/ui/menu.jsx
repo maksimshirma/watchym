@@ -7,7 +7,7 @@ const Menu = ({ children }) => {
 
     return (
         <div
-            className="z-0 relative grid justify-items-end text-center"
+            className="z-0 relative text-center"
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
         >

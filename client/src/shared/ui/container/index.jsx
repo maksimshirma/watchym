@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const Container = ({ children }) => {
-    return <div className="w-full sm:w-4/5 h-[100vh] relative mx-auto flex flex-col">{children}</div>;
+    return <div className="w-full h-[100vh] flex flex-col">{children}</div>;
 };
 
 Container.propTypes = {

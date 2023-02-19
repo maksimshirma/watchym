@@ -1,4 +1,3 @@
-import AccauntsPage from "../accauntsPage/index.jsx";
 import SettingsPage from "../settingsPage/index.jsx";
 import HistoryPage from "../historyPage/index.jsx";
 import SignInPage from "../signInPage/index.jsx";
@@ -28,11 +27,6 @@ export const routes = {
         title: "Операции",
         path: "/history",
         element: <HistoryPage />,
-    },
-    accaunts: {
-        title: "Счета",
-        path: "/accaunts",
-        element: <AccauntsPage />,
     },
     signIn: {
         title: "Вход",

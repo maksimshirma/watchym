@@ -1,3 +1,2 @@
-import history from "./history.js";
-
-export { history };
+export { history } from "./history.js";
+export { convertDate } from "./convertDate";

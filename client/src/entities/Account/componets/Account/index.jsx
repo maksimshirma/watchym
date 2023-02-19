@@ -1,19 +1,28 @@
 import PropTypes from "prop-types";
-import { Button } from "../../../../shared";
+import { accountsModel } from "../../model";
+import { useSelector } from "react-redux";
 
-const Account = ({ _id, name, number, amount, onDelete, toggleEdit }) => {
+const Account = ({ _id, onEdit }) => {
+    const account = useSelector(accountsModel.getAccountById(_id));
+    const { number, name, amount } = account;
+    const handleEdit = () => {
+        onEdit(_id);
+    };
     return (
-        <div className="w-full my-1 border-[1px] border-black flex items-center rounded-lg text-xs sm:text-sm lg:text-base">
-            <div className="w-1/2 p-2">
-                <div>{name}</div>
-                <div>Номер: {number}</div>
+        <div
+            role={"presentation"}
+            className="w-full mb-1 flex items-center text-xs sm:text-sm lg:text-base text-left cursor-pointer hover:bg-gray-200 hover:rounded-lg transition-all"
+            onClick={handleEdit}
+        >
+            <div className="w-12 h-10 bg-red-500 rounded-lg text-white text-xs flex justify-center items-end">
+                <div className="">{"***" + String(number).slice(16)}</div>
             </div>
-            <div className="w-1/6 ">
-                <div className="text-center">{amount} руб.</div>
-            </div>
-            <div className="w-1/3 text-right text-[10px] sm:text-sm lg:text-base">
-                <Button title={"Редактировать"} onClick={() => toggleEdit(_id)} />
-                <Button title={"Удалить"} onClick={() => onDelete(_id)} />
+            <div className="ml-2">
+                <div className="">{name}</div>
+                <div className="text-sm flex flex-row">
+                    <p>{amount}</p>
+                    <p className="ml-1 text-gray-400">Руб.</p>
+                </div>
             </div>
         </div>
     );
@@ -21,11 +30,7 @@ const Account = ({ _id, name, number, amount, onDelete, toggleEdit }) => {
 
 Account.propTypes = {
     _id: PropTypes.string,
-    name: PropTypes.string,
-    number: PropTypes.number,
-    amount: PropTypes.number,
-    onDelete: PropTypes.func,
-    toggleEdit: PropTypes.func,
+    onEdit: PropTypes.func,
 };
 
 export default Account;

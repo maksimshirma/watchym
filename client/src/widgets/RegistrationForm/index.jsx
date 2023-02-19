@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField, Button } from "../../shared";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../entities";
+import { userModel } from "../../entities";
 
 const RegistrationForm = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const RegistrationForm = () => {
         setData((prevState) => ({ ...prevState, [name]: value }));
     };
     const handleSubmit = () => {
-        dispatch(signUp(data));
+        dispatch(userModel.signUp(data));
     };
     return (
         <div className="">
