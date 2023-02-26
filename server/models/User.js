@@ -8,7 +8,6 @@ const schema = new Schema({
         unique: true
     },
     password: {type: String, required: true},
-    image: {type: String},
     accounts: [{type: Schema.Types.ObjectId, ref: "Account"}],
     operations: [{type: Schema.Types.ObjectId, ref: "Operation"}]
 }, {

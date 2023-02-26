@@ -2,7 +2,6 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import { User } from "../models/User.js";
-import { generateUserData } from "../utils/helpers.js";
 import tokenService from "../services/token.service.js";
 
 const router = express.Router({
@@ -40,7 +39,6 @@ router.post("/signUp", [
             const hashedPassword = await bcrypt.hash(password, 12);
             
             const newUser = await User.create({
-                ...generateUserData(),
                 ...req.body,
                 password: hashedPassword,
                 accounts: [],
