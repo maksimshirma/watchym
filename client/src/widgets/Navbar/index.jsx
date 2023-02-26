@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userModel, UserNavProfile } from "../../entities";
 import { changeRoutesWithIsLoggedIn } from "./lib";
 import { modalModel, EditUserForm } from "../../features";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ routes }) => {
     const dispatch = useDispatch();
@@ -19,13 +20,19 @@ const Navbar = ({ routes }) => {
                             <Navigation routes={navLinks} />
                         </div>
                     </div>
-                    <div className="w-1/4">
+                    <div className="w-1/4 flex justify-end items-center">
                         <div
                             role={"presentation"}
                             onClick={() => dispatch(modalModel.handleOpenModal(<EditUserForm />))}
                         >
-                            <UserNavProfile route={routes.signOut} />
+                            <UserNavProfile />
                         </div>
+                        <Link
+                            className="ml-2 px-2 border-[1px] border-black hover:bg-gray-200 transition-all"
+                            to={routes.signOut.path}
+                        >
+                            {routes.signOut.title}
+                        </Link>
                     </div>
                 </div>
             ) : (
