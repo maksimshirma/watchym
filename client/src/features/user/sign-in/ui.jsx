@@ -9,7 +9,6 @@ import * as yup from "yup";
 const AuthorizationForm = () => {
     const dispatch = useDispatch();
     const authError = useSelector(userModel.getAuthError());
-    console.log(authError);
 
     const [data, setData] = useState({
         email: "",

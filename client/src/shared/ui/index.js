@@ -22,3 +22,4 @@ export { default as FormatedAmount } from "./formatedAmount";
 export { default as SubmitButton } from "./submitButton";
 export { default as LeftArrowIcon } from "./leftArrow.icon";
 export { default as RightArrowIcon } from "./rightArrow.icon";
+export { default as LayoutAuthForm } from "./layoutAuthForm";

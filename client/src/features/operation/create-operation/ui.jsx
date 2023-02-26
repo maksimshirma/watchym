@@ -71,7 +71,10 @@ const CreateOperationForm = () => {
         dispatch(modalModel.handleCloseModal());
     };
 
-    if (accounts && categories) {
+    if (accounts.length === 0) {
+        return "У вас нет счетов.";
+    }
+    if (accounts.length !== 0 && categories.length !== 0) {
         return (
             <form
                 onSubmit={handleSubmit}

@@ -23,6 +23,7 @@ export {
     SubmitButton,
     LeftArrowIcon,
     RightArrowIcon,
+    LayoutAuthForm,
 } from "./ui";
 export { httpService, localStorageService, authService } from "./api";
 export { history, convertDateToNumber, formateAmount, convertDateToString } from "./lib";

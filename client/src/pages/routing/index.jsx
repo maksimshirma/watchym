@@ -26,12 +26,10 @@ export const Routing = () => {
         <Routes>
             <Route element={<ProtectedLoggedOutRoutes isLoggedIn={isLoggedIn} />}>
                 <Route
-                    key={routes.unauthorized.title}
-                    path={routes.unauthorized.path}
-                    element={routes.unauthorized.element}
+                    key={routes.authorization.title}
+                    path={routes.authorization.path}
+                    element={routes.authorization.element}
                 />
-                <Route key={routes.signIn.title} path={routes.signIn.path} element={routes.signIn.element} />
-                <Route key={routes.signUp.title} path={routes.signUp.path} element={routes.signUp.element} />
             </Route>
             <Route element={<ProtectedLoggedInRoutes isLoggedIn={isLoggedIn} />}>
                 {Object.keys(routes).map((key) => {

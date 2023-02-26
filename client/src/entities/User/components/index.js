@@ -1,5 +1,2 @@
-import UserNavProfile from "./UserNavProfile";
-import UserLoader from "./UserLoader";
-import UserCard from "./UserCard";
-
-export { UserNavProfile, UserLoader, UserCard };
+export { default as UserNavProfile } from "./UserNavProfile";
+export { default as UserLoader } from "./UserLoader";

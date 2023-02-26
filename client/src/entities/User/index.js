@@ -1,2 +1,2 @@
 export { userModel } from "./model";
-export { UserNavProfile, UserLoader, UserCard } from "./components";
+export { UserNavProfile, UserLoader } from "./components";

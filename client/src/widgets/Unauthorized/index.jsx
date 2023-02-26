@@ -1,21 +1,47 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { AuthorizationForm, RegistrationForm } from "../../features";
+import { LayoutAuthForm } from "../../shared";
 
 const Unauthorized = () => {
-    return (
-        <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center w-1/2">
+    const [param, setParam] = useState(true);
+    if (param) {
+        return (
+            <LayoutAuthForm>
                 <div>
-                    <p>Вы не авторизованы!</p>
+                    <AuthorizationForm />
                 </div>
-                <div className="">
-                    <p>
-                        Чтобы начать пользоваться сайтом, <Link to="/signIn">войдите</Link> в существующую учётную
-                        запись или <Link to="/signUp">зарегистрируйтесь</Link>, если у Вас её нет.
+                <p className="pt-1">
+                    Нет аккаунта?{" "}
+                    <b
+                        role={"presentation"}
+                        className="w-fit cursor-pointer text-black transition-all"
+                        onClick={() => setParam((prevState) => !prevState)}
+                    >
+                        Зарегистрируйтесь!
+                    </b>
+                </p>
+            </LayoutAuthForm>
+        );
+    }
+    if (!param) {
+        return (
+            <LayoutAuthForm>
+                <RegistrationForm />
+                <div>
+                    <p className="pt-1">
+                        Уже есть аккаунт?{" "}
+                        <b
+                            role={"presentation"}
+                            className="w-fit cursor-pointer text-black transition-all"
+                            onClick={() => setParam((prevState) => !prevState)}
+                        >
+                            Войдите!
+                        </b>
                     </p>
                 </div>
-            </div>
-        </div>
-    );
+            </LayoutAuthForm>
+        );
+    }
 };
 
 export default Unauthorized;

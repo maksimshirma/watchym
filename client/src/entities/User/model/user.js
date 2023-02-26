@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAction } from "@reduxjs/toolkit";
 import { authService, localStorageService } from "../../../shared";
 import userService from "../api";
 
@@ -71,12 +71,12 @@ const {
     authRequestSuccessed,
     authRequestFailed,
     userSignedOut,
-    // userUpdated,
+    userUpdated,
     authRequested,
 } = actions;
 
-// const userUpdateRequested = createAction("users/userUpdateRequested");
-// const userUpdateFailed = createAction("users/userUpdateFailed");
+const userUpdateRequested = createAction("users/userUpdateRequested");
+const userUpdateFailed = createAction("users/userUpdateFailed");
 
 // prettier-ignore
 export const signUp =
@@ -109,6 +109,16 @@ export const signIn =
 export const signOut = () => (dispatch) => {
     localStorageService.removeAuthData();
     dispatch(userSignedOut());
+};
+
+export const updateUser = (payload) => async (dispatch) => {
+    dispatch(userUpdateRequested());
+    try {
+        const data = await userService.edit(payload);
+        dispatch(userUpdated(data));
+    } catch (error) {
+        dispatch(userUpdateFailed());
+    }
 };
 
 export const loadUser = () => async (dispatch) => {
