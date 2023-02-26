@@ -1,27 +1,32 @@
 [
     {
-      "_id": "67rdca3eeb7f6fgeed471198",
-      "name": "Разное",
+      "_id": "hBO9SO9ef4S-jw-HmIc2x",
+      "name": "Остальное",
       "color": "#d1dbd5"
     },
     {
-      "_id": "67rdca3eeb7f6fgeed471100",
+      "_id": "tflGZRlVv5wFyxBrJYon",
       "name": "Транспорт",
       "color": "#c5cf91"
     },
     {
-      "_id": "67rdca3eeb7f6fgeed4711012",
-      "name": "Здоровье",
-      "color": "#16db65"
-    },
-    {
-      "_id": "67rdca3eeb7f6fgeed471101",
+      "_id": "twlvF3K-TamkIhjoc3-bm",
       "name": "Одежда",
       "color": "#538bbb"
     },
     {
-      "_id": "67rdca3eeb7f6fgeed471102",
+      "_id": "jNPjKaNjeS1q1ui0mn3Ks",
       "name": "Продукты",
+      "color": "#43f900"
+    },
+    {
+      "_id": "cSLHyxM4lIqARGafFxhLO",
+      "name": "Телефон, интернет, ТВ",
+      "color": "#43f900"
+    },
+    {
+      "_id":"lNnBPJJnk_lZOtKHhedvT",
+      "name": "Фастфуд",
       "color": "#43f900"
     }
 ]

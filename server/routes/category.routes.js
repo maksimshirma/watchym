@@ -1,4 +1,3 @@
-
 import express from "express";
 import { Category } from "../models/Category.js";
 
