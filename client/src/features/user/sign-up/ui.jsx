@@ -3,6 +3,7 @@ import { TextField, SubmitButton } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
 import { parseYupError } from "../../lib";
+import { getErrorMessage } from "../lib";
 import * as yup from "yup";
 
 const RegistrationForm = () => {
@@ -26,7 +27,7 @@ const RegistrationForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid) {
-            dispatch(userModel.signIn(data));
+            dispatch(userModel.signUp(data));
         }
     };
 
@@ -73,7 +74,7 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 error={errors.name}
             />
-            {authError && <p className="text-danger">{authError}</p>}
+            {authError && <p className="text-danger">{getErrorMessage(authError)}</p>}
             <SubmitButton title={"Зарегестрироваться"} />
         </form>
     );

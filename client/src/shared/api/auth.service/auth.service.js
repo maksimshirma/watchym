@@ -3,27 +3,16 @@ import config from "../../config/config.json";
 import localStorageService from "../localStorage.service";
 
 const httpAuth = axios.create({
-    baseURL: "https://identitytoolkit.googleapis.com/v1/",
-    params: {
-        key: config.API_WEB_KEY,
-    },
+    baseURL: config.API_BASE_URL,
 });
 
 const authService = {
-    register: async ({ email, password }) => {
-        const { data } = await httpAuth.post("accounts:signUp", {
-            email,
-            password,
-            returnSecureToken: true,
-        });
+    register: async (payload) => {
+        const { data } = await httpAuth.post("auth/signUp", payload);
         return data;
     },
-    login: async ({ email, password }) => {
-        const { data } = await httpAuth.post("accounts:signInWithPassword", {
-            email,
-            password,
-            returnSecureToken: true,
-        });
+    login: async (payload) => {
+        const { data } = await httpAuth.post("auth/signInWithPassword", payload);
         return data;
     },
     refresh: async () => {

@@ -9,12 +9,14 @@ const http = axios.create({
 
 http.interceptors.request.use(
     async function (config) {
+        const expiresDate = localStorageService.getExpiresDate();
+        const refreshToken = localStorageService.getRefreshToken();
+        const isExpired = refreshToken && expiresDate < Date.now();
+
         if (configJSON.isFireBase) {
             const isContainSlash = /\/$/gi.test(config.url);
             config.url = (isContainSlash ? config.url.slice(0, -1) : config.url) + ".json";
-            const expiresDate = localStorageService.getExpiresDate();
-            const refreshToken = localStorageService.getRefreshToken();
-            if (refreshToken && expiresDate < Date.now()) {
+            if (isExpired) {
                 const data = await authService.refresh();
                 localStorageService.setTokens({
                     refreshToken: data.refresh_token,
@@ -30,8 +32,24 @@ http.interceptors.request.use(
                     auth: accesToken,
                 };
             }
-            return config;
+        } else {
+            if (isExpired) {
+                const data = await authService.refresh();
+                localStorageService.setTokens(data);
+            }
+            const accesToken = localStorageService.getAccessToken();
+            if (accesToken) {
+                config.headers = {
+                    ...config.params,
+                    Authorization: `Bearer ${accesToken}`,
+                };
+                config.params = {
+                    orderBy: config.orderBy,
+                    equalTo: config.equalTo,
+                };
+            }
         }
+        return config;
     },
     function (error) {
         return Promise.reject(error);
@@ -61,7 +79,7 @@ http.interceptors.response.use(
 const httpService = {
     get: http.get,
     post: http.post,
-    put: http.put,
+    patch: http.patch,
     delete: http.delete,
 };
 

@@ -1,4 +1,4 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { authService, localStorageService } from "../../../shared";
 import userService from "../api";
 
@@ -51,9 +51,6 @@ export const userSlice = createSlice({
         authRequestFailed: (state, action) => {
             state.error = action.payload;
         },
-        userCreated: (state, action) => {
-            state.entities = action.payload;
-        },
         userSignedOut: (state) => {
             state.entities = null;
             state.isLoggedIn = false;
@@ -73,62 +70,39 @@ const {
     userRequestFailed,
     authRequestSuccessed,
     authRequestFailed,
-    userCreated,
     userSignedOut,
     // userUpdated,
     authRequested,
 } = actions;
 
-const userCreateRequested = createAction("users/userCreateRequested");
-const userCreateFailed = createAction("users/userCreateFailed");
 // const userUpdateRequested = createAction("users/userUpdateRequested");
 // const userUpdateFailed = createAction("users/userUpdateFailed");
 
-const createUser = (payload) => async (dispatch) => {
-    dispatch(userCreateRequested());
-    try {
-        const { content } = await userService.create(payload);
-        dispatch(userCreated(content));
-    } catch (error) {
-        dispatch(userCreateFailed(error.message));
-    }
-};
-
 // prettier-ignore
 export const signUp =
-    ({ email, password, ...rest }) =>
+    (payload) =>
         async (dispatch) => {
             dispatch(authRequested());
             try {
-                const data = await authService.register({ email, password });
+                const data = await authService.register(payload);
                 localStorageService.setTokens(data);
-                dispatch(authRequestSuccessed({ userId: data.localId }));
-                dispatch(
-                    createUser({
-                        _id: data.localId,
-                        email,
-                        image: `https://avatars.dicebear.com/api/avataaars/${(Math.random() + 1)
-                            .toString(36)
-                            .substring(7)}.svg`,
-                        ...rest,
-                    })
-                );
+                dispatch(authRequestSuccessed({ userId: data.userId }));
             } catch (error) {
-                dispatch(authRequestFailed(error.message));
+                dispatch(authRequestFailed(error.response.data.error));
             }
         };
 
 // prettier-ignore
 export const signIn =
-    ({ email, password }) =>
+    (payload) =>
         async (dispatch) => {
             dispatch(authRequested());
             try {
-                const data = await authService.login({ email, password });
+                const data = await authService.login(payload);
                 localStorageService.setTokens(data);
-                dispatch(authRequestSuccessed({ userId: data.localId }));
+                dispatch(authRequestSuccessed({ userId: data.userId }));
             } catch (error) {
-                dispatch(authRequestFailed(error.message));
+                dispatch(authRequestFailed(error.response.data.error));
             }
         };
 

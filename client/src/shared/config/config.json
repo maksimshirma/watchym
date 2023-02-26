@@ -1,5 +1,4 @@
 {
-    "API_BASE_URL": "https://graduation-48d0c-default-rtdb.europe-west1.firebasedatabase.app/",
-    "API_WEB_KEY": "AIzaSyBBvLJlnpQVMybJkM_Pv-d6EJ2YHU-pqEA",
-    "isFireBase": true
+    "API_BASE_URL": "http://localhost:8080/api",
+    "isFireBase": false
 }

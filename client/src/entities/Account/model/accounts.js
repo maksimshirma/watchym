@@ -56,7 +56,7 @@ const operateAccountFailed = createAction("accounts/operateAccountFailed");
 export const loadAccountsList = () => async (dispatch) => {
     dispatch(accountsRequested());
     try {
-        const content = await accountsService.getAll();
+        const content = await accountsService.get();
         dispatch(accountsReceved(content));
     } catch (error) {
         dispatch(accountsRequestFailed(error.message));

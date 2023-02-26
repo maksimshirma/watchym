@@ -3,11 +3,13 @@ import { TextField, SubmitButton } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
 import { parseYupError } from "../../lib";
+import { getErrorMessage } from "../lib";
 import * as yup from "yup";
 
 const AuthorizationForm = () => {
     const dispatch = useDispatch();
     const authError = useSelector(userModel.getAuthError());
+    console.log(authError);
 
     const [data, setData] = useState({
         email: "",
@@ -63,7 +65,7 @@ const AuthorizationForm = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
-            {authError && <p className="text-danger">{authError}</p>}
+            {authError && <p className="text-danger">{getErrorMessage(authError)}</p>}
             <SubmitButton title={"Войти"} />
         </form>
     );

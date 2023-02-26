@@ -61,7 +61,7 @@ const operationDeleteFailed = createAction("operations/operationDeleteFailed");
 export const loadOperationsList = () => async (dispatch) => {
     dispatch(operationsRequested());
     try {
-        const content = await operationsService.getAll();
+        const content = await operationsService.get();
         dispatch(operationsReceved(content));
     } catch (error) {
         dispatch(operationsRequestFailed(error.message));
