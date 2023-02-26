@@ -12,5 +12,6 @@
         },
     },
     "editor.formatOnSave": true,
-    "prettier.requireConfig": true
+    "prettier.requireConfig": true,
+    "git.ignoreLimitWarning": true
 }
