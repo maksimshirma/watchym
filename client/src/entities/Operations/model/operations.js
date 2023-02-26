@@ -1,5 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import operationsService from "../api";
+// import { filterOperations } from "../lib";
 
 export const operationsSlice = createSlice({
     name: "operations",
@@ -100,11 +101,33 @@ export const deleteOperation = (id) => async (dispatch) => {
 };
 
 export const getOperationsDataStatus = () => (state) => state.operations.dataLoaded;
-export const getOperationsList = () => (state) => state.operations.entities;
+
+export const getOperationsList = () => (state) => {
+    if (state.operations.entities) {
+        const arrayForSort = [...state.operations.entities];
+        arrayForSort.sort((a, b) => (a.date < b.date ? 1 : -1));
+        return arrayForSort;
+    }
+    return [];
+};
+
+export const getIncomeOperationsList = () => (state) => {
+    return state.operations.entities
+        ? state.operations.entities.filter((operation) => operation.type === "income")
+        : null;
+};
+
+export const getExpenseOperationsList = () => (state) => {
+    return state.operations.entities
+        ? state.operations.entities.filter((operation) => operation.type === "expense")
+        : null;
+};
+
 export const getOperationById = (id) => (state) => {
     if (id) {
-        return state.operations.entities ? state.operations.entities.find((user) => user._id === id) : null;
+        return state.operations.entities ? state.operations.entities.find((operation) => operation._id === id) : null;
     }
     return null;
 };
+
 export const operationsReducer = operationsSlice.reducer;

@@ -1,10 +1,15 @@
-import { PageHeader } from "../../shared";
+import { LayoutMain, PageHeader } from "../../shared";
+import { Accounts, Analytics } from "../../widgets";
 
 const AnalyticsPage = () => {
     return (
-        <div>
-            <PageHeader>Аналитика</PageHeader>
-        </div>
+        <LayoutMain>
+            <Accounts />
+            <div className="w-full h-full">
+                <PageHeader>Аналитика</PageHeader>
+                <Analytics />
+            </div>
+        </LayoutMain>
     );
 };
 

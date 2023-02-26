@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AccountsList, accountsModel } from "../../entities";
-import { AddAccountIcon } from "../../shared";
+import { AccountsList, accountsModel, AccountsAllMoney } from "../../entities";
+import { AddAccountIcon, PageHeader } from "../../shared";
 import { EditAccountForm, CreateAccountForm, modalModel } from "../../features";
 
 const Accounts = () => {
@@ -22,9 +22,13 @@ const Accounts = () => {
     if (dataLoaded) {
         return (
             <div className="m-1">
-                <p className="text-2xl">Мои счета</p>
+                <PageHeader>Мои счета</PageHeader>
+                <div className="w-fit ml-2">
+                    <AccountsAllMoney />
+                </div>
+                <PageHeader>Счета</PageHeader>
                 <AccountsList onDelete={handleDelete} onEdit={handleEdit} />
-                <p className="text-2xl">Добавить счёт</p>
+                <PageHeader>Добавить счёт</PageHeader>
                 <AddAccountIcon onCreate={handleCreate} />
             </div>
         );

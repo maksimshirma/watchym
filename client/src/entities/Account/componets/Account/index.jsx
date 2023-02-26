@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { accountsModel } from "../../model";
 import { useSelector } from "react-redux";
+import { accountsModel } from "../../model";
+import { FormatedAmount } from "../../../../shared";
 
 const Account = ({ _id, onEdit }) => {
     const account = useSelector(accountsModel.getAccountById(_id));
@@ -11,7 +12,7 @@ const Account = ({ _id, onEdit }) => {
     return (
         <div
             role={"presentation"}
-            className="w-full mb-1 flex items-center text-xs sm:text-sm lg:text-base text-left cursor-pointer hover:bg-gray-200 hover:rounded-lg transition-all"
+            className="w-full mb-1 flex items-center text-xs sm:text-sm lg:text-base text-left cursor-pointer hover:bg-gray-200 hover:rounded-lg hover:p-1 transition-all"
             onClick={handleEdit}
         >
             <div className="w-12 h-10 bg-red-500 rounded-lg text-white text-xs flex justify-center items-end">
@@ -20,8 +21,7 @@ const Account = ({ _id, onEdit }) => {
             <div className="ml-2">
                 <div className="">{name}</div>
                 <div className="text-sm flex flex-row">
-                    <p>{amount}</p>
-                    <p className="ml-1 text-gray-400">Руб.</p>
+                    <FormatedAmount amount={amount} />
                 </div>
             </div>
         </div>

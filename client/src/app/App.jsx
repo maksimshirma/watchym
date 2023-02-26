@@ -1,8 +1,8 @@
 import "./index.scss";
 import { Routing, routes } from "../pages";
-import { Navbar, Modal, Accounts } from "../widgets";
+import { Navbar, Modal } from "../widgets";
 import ProvidersWrapper from "./providers/index.jsx";
-import { LayoutMain, LayoutNavbar, Container } from "../shared";
+import { LayoutNavbar, Container } from "../shared";
 
 const App = () => (
     <ProvidersWrapper>
@@ -10,10 +10,7 @@ const App = () => (
             <LayoutNavbar>
                 <Navbar routes={routes} />
             </LayoutNavbar>
-            <LayoutMain>
-                <Accounts />
-                <Routing />
-            </LayoutMain>
+            <Routing />
         </Container>
         <Modal />
     </ProvidersWrapper>

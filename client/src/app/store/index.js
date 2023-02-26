@@ -1,5 +1,5 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { userModel, accountsModel, operationsModel } from "../../entities";
+import { userModel, accountsModel, operationsModel, categoriesModel } from "../../entities";
 import { modalModel } from "../../features";
 
 const rootReducer = combineReducers({
@@ -7,6 +7,7 @@ const rootReducer = combineReducers({
     accounts: accountsModel.accountsReducer,
     operations: operationsModel.operationsReducer,
     modal: modalModel.reducer,
+    categories: categoriesModel.categoriesReducer,
 });
 
 export function createStore() {

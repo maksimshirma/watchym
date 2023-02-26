@@ -9,37 +9,37 @@ import SignOutPage from "../signOutPage/index.jsx";
 
 export const routes = {
     unauthorized: {
-        title: "Главная",
+        title: "главная",
         path: "/",
         element: <UnauthorizedPage />,
     },
     settings: {
-        title: "Редактировать профиль",
+        title: "редактировать профиль",
         path: "/user/:edit",
         element: <SettingsPage />,
     },
     analytics: {
-        title: "Аналитика",
+        title: "аналитика",
         path: "/analytics",
         element: <AnalyticsPage />,
     },
     history: {
-        title: "Операции",
+        title: "операции",
         path: "/history",
         element: <HistoryPage />,
     },
     signIn: {
-        title: "Вход",
+        title: "вход",
         path: "/signIn",
         element: <SignInPage />,
     },
     signUp: {
-        title: "Регистрация",
+        title: "регистрация",
         path: "/signUp",
         element: <SignUpPage />,
     },
     signOut: {
-        title: "Выход",
+        title: "выход",
         path: "/signOut",
         element: <SignOutPage />,
     },

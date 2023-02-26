@@ -13,11 +13,6 @@ body {
     font-family: "Roboto";
 }
 
-input[type=date]::-webkit-calendar-picker-indicator {
-    -webkit-appearance: none;
-    opacity: 0;
-}
-
 button {
     padding: 0;
     border: none;
@@ -26,3 +21,9 @@ button {
     background-color: transparent;
     cursor: pointer;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+  }
+
+  

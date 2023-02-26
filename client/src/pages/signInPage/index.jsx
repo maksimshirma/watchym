@@ -1,10 +1,11 @@
-import { AuthorizationForm } from "../../widgets";
+import { Authorization } from "../../widgets";
 
 const SignInPage = () => {
     return (
-        <div>
-            SignIn Page
-            <AuthorizationForm />
+        <div className="w-full h-full grid justify-items-center content-center">
+            <div className="w-1/2 h-fit mb-20">
+                <Authorization />
+            </div>
         </div>
     );
 };

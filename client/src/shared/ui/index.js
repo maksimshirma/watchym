@@ -1,4 +1,4 @@
-export { default as NavLinks } from "./navLinks";
+export { default as Navigation } from "./navigation";
 export { default as Button } from "./button";
 export { default as LayoutNavbar } from "./layoutNavbar";
 export { default as LayoutMain } from "./layoutMain";
@@ -18,3 +18,7 @@ export { default as AddIcon } from "./add.icon";
 export { default as AddAccountIcon } from "./addAccount.icon";
 export { default as CloseIcon } from "./close.icon";
 export { default as CloseModalIcon } from "./closeModal.icon";
+export { default as FormatedAmount } from "./formatedAmount";
+export { default as SubmitButton } from "./submitButton";
+export { default as LeftArrowIcon } from "./leftArrow.icon";
+export { default as RightArrowIcon } from "./rightArrow.icon";

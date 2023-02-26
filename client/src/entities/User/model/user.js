@@ -150,5 +150,6 @@ export const loadUser = () => async (dispatch) => {
 export const getUser = () => (state) => state.user.entities;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getUserDataStatus = () => (state) => state.user.dataLoaded;
+export const getAuthError = () => (state) => state.user.error;
 
 export const userReducer = userSlice.reducer;

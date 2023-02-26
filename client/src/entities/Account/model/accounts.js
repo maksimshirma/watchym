@@ -50,6 +50,8 @@ const accountUpdateRequested = createAction("accounts/accountUpdateRequested");
 const accountUpdateFailed = createAction("accounts/accountUpdateFailed");
 const accountDeleteRequested = createAction("accounts/accountDeleteRequested");
 const accountDeleteFailed = createAction("accounts/accountDeleteFailed");
+const operateAccountRequested = createAction("accounts/operateAccountRequested");
+const operateAccountFailed = createAction("accounts/operateAccountFailed");
 
 export const loadAccountsList = () => async (dispatch) => {
     dispatch(accountsRequested());
@@ -93,11 +95,33 @@ export const deleteAccount = (id) => async (dispatch) => {
     }
 };
 
+export const operateAccount = (operation, account) => async (dispatch) => {
+    dispatch(operateAccountRequested());
+    try {
+        let newAmount = 0;
+        if (operation.type === "income") {
+            newAmount = operation.amount + account.amount;
+        } else if (operation.type === "expense") {
+            if (account.amount > operation.amount) {
+                newAmount = account.amount - operation.amount;
+            } else {
+                dispatch(operateAccountFailed());
+            }
+        } else {
+            dispatch(operateAccountFailed());
+        }
+        const content = await accountsService.update({ ...account, amount: newAmount });
+        dispatch(accountUpdated(content));
+    } catch (error) {
+        dispatch(operateAccountFailed());
+    }
+};
+
 export const getAccountsDataStatus = () => (state) => state.accounts.dataLoaded;
 export const getAccountsList = () => (state) => state.accounts.entities;
 export const getAccountById = (id) => (state) => {
     if (id) {
-        return state.accounts.entities ? state.accounts.entities.find((user) => user._id === id) : null;
+        return state.accounts.entities ? state.accounts.entities.find((account) => account._id === id) : null;
     }
     return null;
 };

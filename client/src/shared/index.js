@@ -1,5 +1,5 @@
 export {
-    NavLinks,
+    Navigation,
     Button,
     LayoutNavbar,
     LayoutMain,
@@ -19,7 +19,11 @@ export {
     AddAccountIcon,
     CloseIcon,
     CloseModalIcon,
+    FormatedAmount,
+    SubmitButton,
+    LeftArrowIcon,
+    RightArrowIcon,
 } from "./ui";
 export { httpService, localStorageService, authService } from "./api";
-export { history, convertDate } from "./lib";
+export { history, convertDateToNumber, formateAmount, convertDateToString } from "./lib";
 export { default as config } from "./config/config.json";

@@ -15,8 +15,8 @@ const Modal = () => {
     };
 
     return (
-        <div role="presentation" className={isOpen ? "modal active" : "modal"}>
-            <div className={isOpen ? "modal__content active" : "modal__content"}>
+        <div role="presentation" className={isOpen ? "my-modal active" : "my-modal"}>
+            <div className={isOpen ? "my-modal__content active" : "my-modal__content"}>
                 <CloseModalIcon onClose={handleCloseModal} />
                 <div className="w-full h-fit">{component && component}</div>
             </div>

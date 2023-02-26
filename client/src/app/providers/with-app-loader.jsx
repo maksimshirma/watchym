@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { UserLoader, AccountsLoader, userModel, OperationsLoader } from "../../entities";
+import { UserLoader, AccountsLoader, userModel, OperationsLoader, CategoriesLoader } from "../../entities";
 
 const AppLoaderWrapper = ({ children }) => {
     const isLoggedIn = useSelector(userModel.getIsLoggedIn());
     if (isLoggedIn) {
         return (
-            <UserLoader>
-                <AccountsLoader>
-                    <OperationsLoader>{children}</OperationsLoader>
-                </AccountsLoader>
-            </UserLoader>
+            <CategoriesLoader>
+                <UserLoader>
+                    <AccountsLoader>
+                        <OperationsLoader>{children}</OperationsLoader>
+                    </AccountsLoader>
+                </UserLoader>
+            </CategoriesLoader>
         );
     }
     return <>{children}</>;

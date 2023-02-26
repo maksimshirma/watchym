@@ -12,10 +12,10 @@ const GroupList = ({ items, label, valueProperty, contentProperty, onItemSelect,
     };
     if (items) {
         return (
-            <div className="mx-3">
+            <div className="w-full">
                 <button className="flex items-center w-full" onClick={handleClick}>
-                    <div className="text-left grow">{label}</div>
-                    <div className="w-3 h-3 flex-none">{isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}</div>
+                    <div className="grow text-left">{label}</div>
+                    <div className="w-3 h-3">{isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}</div>
                 </button>
                 {isOpen &&
                     items.map((item, i) => (

@@ -1,2 +1,2 @@
 export { accountsModel } from "./model";
-export { AccountsLoader, AccountsList } from "./componets";
+export { AccountsLoader, AccountsList, AccountsAllMoney } from "./componets";

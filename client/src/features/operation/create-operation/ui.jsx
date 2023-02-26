@@ -1,83 +1,133 @@
-import { useState } from "react";
-import { TextField, SelectField, convertDate, Button } from "../../../shared";
+import { useState, useEffect } from "react";
+import {
+    TextField,
+    SelectField,
+    convertDateToNumber,
+    Button,
+    convertDateToString,
+    SubmitButton,
+} from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
-import { accountsModel, operationsModel } from "../../../entities";
+import { accountsModel, operationsModel, categoriesModel } from "../../../entities";
 import { modalModel } from "../../../features";
+import { parseYupError } from "../../lib";
+import { validationSchema } from "../lib";
 
 const CreateOperationForm = () => {
     const dispatch = useDispatch();
     const accounts = useSelector(accountsModel.getAccountsList());
+    const categories = useSelector(categoriesModel.getCategoriesList());
+
     //prettier-ignore
     const [data, setData] = useState(
         {
             account: "",
             type: "",
+            category: "",
             amount: "",
             date: "",
         }
     );
 
+    const [errors, setErrors] = useState({});
+
+    const isValid = Object.keys(errors).length === 0;
+
     const handleChange = ({ name, value }) => {
         setData((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    const handleSubmit = () => {
-        const newData = {
-            _id: nanoid(),
-            type: data.type,
-            date: convertDate(data.date),
-            amount: Number(data.amount),
-            account: data.account,
-        };
-        dispatch(operationsModel.createOperation(newData));
-        dispatch(modalModel.handleCloseModal());
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isValid) {
+            const newData = {
+                _id: nanoid(),
+                type: data.type,
+                date: convertDateToNumber(data.date),
+                amount: Number(data.amount.replaceAll(",", ".")),
+                account: data.account,
+                category: data.type === "income" ? "" : data.category,
+            };
+            const account = accounts.find((account) => account._id === newData.account);
+            dispatch(accountsModel.operateAccount(newData, account));
+            dispatch(operationsModel.createOperation(newData));
+            dispatch(modalModel.handleCloseModal());
+        }
     };
+
+    useEffect(() => {
+        validationSchema
+            .validate(data, { abortEarly: false })
+            .then(() => setErrors({}))
+            .catch((yupError) => {
+                const errors = parseYupError(yupError);
+                setErrors(errors);
+            });
+        // eslint-disable-next-line
+    }, [data]);
 
     const handleCancel = () => {
         dispatch(modalModel.handleCloseModal());
     };
 
-    if (accounts) {
+    if (accounts && categories) {
         return (
-            <div className="w-full flex flex-col items-center rounded-lg text-xs sm:text-sm lg:text-base">
-                <div className="">
-                    <SelectField label={"Счёт:"} name={"account"} options={accounts} onChange={handleChange} />
-                </div>
-                <div className="">
+            <form
+                onSubmit={handleSubmit}
+                className="w-full flex flex-col items-center rounded-lg text-xs sm:text-sm lg:text-base"
+            >
+                <SelectField
+                    label={"Счёт:"}
+                    name={"account"}
+                    options={accounts}
+                    onChange={handleChange}
+                    error={errors.account}
+                />
+                <SelectField
+                    label={"Тип операции:"}
+                    name={"type"}
+                    options={[
+                        { label: "Доход", value: "income" },
+                        { label: "Расход", value: "expense" },
+                    ]}
+                    onChange={handleChange}
+                    error={errors.type}
+                />
+                {data.type === "expense" && (
                     <SelectField
-                        label={"Тип операции:"}
-                        name={"type"}
-                        options={[
-                            { label: "Доход", value: "income" },
-                            { label: "Расход", value: "expense" },
-                        ]}
+                        label={"Категория операции:"}
+                        name={"category"}
+                        options={categories}
                         onChange={handleChange}
+                        error={errors.category}
                     />
+                )}
+                <TextField
+                    label={"Сумма:"}
+                    type={"text"}
+                    name={"amount"}
+                    value={String(data.amount)}
+                    onChange={handleChange}
+                    error={errors.amount}
+                />
+                <TextField
+                    label={"Дата:"}
+                    type={"date"}
+                    name={"date"}
+                    value={data.date ? convertDateToString(data.date) : ""}
+                    onChange={handleChange}
+                    error={errors.date}
+                />
+                <div className="w-full flex flex-row">
+                    <div className="w-1/2 text-center">
+                        <SubmitButton title={"Принять"} />
+                    </div>
+                    <div className="w-1/2 text-center">
+                        <Button title={"Отмена"} onClick={handleCancel} />
+                    </div>
                 </div>
-                <div className="">
-                    <TextField
-                        label={"Дата:"}
-                        type={"date"}
-                        name={"date"}
-                        value={String(data.date)}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="">
-                    <TextField
-                        label={"Сумма:"}
-                        type={"text"}
-                        name={"amount"}
-                        value={String(data.amount)}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="">
-                    <Button title={"Принять"} onClick={handleSubmit} />
-                    <Button title={"Отмена"} onClick={handleCancel} />
-                </div>
-            </div>
+            </form>
         );
     }
     return "Loading...";

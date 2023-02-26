@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { NavLinks } from "../../shared";
+import { Navigation } from "../../shared";
 import { useSelector } from "react-redux";
 import { userModel, UserNavProfile } from "../../entities";
 import { changeRoutesWithIsLoggedIn } from "./lib";
@@ -11,11 +11,11 @@ const Navbar = ({ routes }) => {
         <div className="w-full">
             {isLoggedIn ? (
                 <div className="flex py-2 items-center">
-                    <div className="flex-auto w-1/4">Logo</div>
-                    <div className="flex-auto w-1/2">
-                        <NavLinks routes={navLinks} />
+                    <div className="w-1/4">Logo</div>
+                    <div className="w-1/2">
+                        <Navigation routes={navLinks} />
                     </div>
-                    <div className="flex-auto w-1/4">
+                    <div className="w-1/4">
                         <UserNavProfile routes={[routes.settings, routes.signOut]} />
                     </div>
                 </div>

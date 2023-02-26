@@ -1,4 +1,4 @@
-.modal {
+.my-modal {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -10,12 +10,12 @@
     transition: 0.5s;
 }
 
-.modal.active {
+.my-modal.active {
     opacity: 1;
     pointer-events: all;
 }
 
-.modal__content {
+.my-modal__content {
     position: absolute;
     right: 0;
     height: 100vh;
@@ -26,7 +26,7 @@
     transition: 1s;
 }
 
-.modal__content.active {
+.my-modal__content.active {
     opacity: 1;
     padding: 20px;
 }
