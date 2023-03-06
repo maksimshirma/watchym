@@ -5,7 +5,8 @@ const schema = new Schema({
     _id: {type: String, required: true},
     amount: {type: Number, required: true},
     number: {type: String, required: true},
-    userId: {type: Schema.Types.ObjectId, ref: "User", required: true}
+    userId: {type: Schema.Types.ObjectId, ref: "User", required: true},
+    operationsIds: [{type: String,}]
 }, {
     timestamps: true
 });

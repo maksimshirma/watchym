@@ -1,5 +1,6 @@
 import express from "express";
 import { Account } from "../models/Account.js";
+import { Operation } from "../models/Operation.js";
 import auth from "../middleware/auth.middleware.js";
 
 const router = express.Router({
@@ -8,9 +9,14 @@ const router = express.Router({
 
 router.get("/", auth, async (req, res) => {
     try {
-        const { orderBy, equalTo } = req.query;
-        if (orderBy && equalTo) {
-            const list = await Account.find({ [orderBy]: equalTo });
+        const user = await req.user;
+        if (user) {
+            const { orderBy, equalTo } = req.query;
+            if (orderBy && equalTo) {
+                const list = await Account.find({ [orderBy]: equalTo });
+                return res.send(list);
+            }
+            const list = await Account.find({ userId: user._id });
             return res.send(list);
         }
         return res.status(401).json({ message: "Unauthorized" });
@@ -28,6 +34,9 @@ router.delete("/:accountId", auth, async (req, res) => {
         const user = await req.user
         const deletedAccount = await Account.findById(accountId);
         if (deletedAccount.userId.toString() === user._id) {
+            if (deletedAccount.operationsIds.length !== 0) {
+                deletedAccount.operationsIds.forEach(async id => await Operation.findByIdAndDelete(id));
+            }
             await deletedAccount.remove();
             return res.send(null);
         }
