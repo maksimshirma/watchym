@@ -2,7 +2,7 @@ export {
     Navigation,
     Button,
     LayoutNavbar,
-    LayoutMain,
+    Layout,
     PageHeader,
     TextField,
     Container,
@@ -16,7 +16,6 @@ export {
     AcceptIcon,
     CancelIcon,
     AddIcon,
-    AddAccountIcon,
     CloseIcon,
     CloseModalIcon,
     FormatedAmount,
@@ -24,7 +23,11 @@ export {
     LeftArrowIcon,
     RightArrowIcon,
     LayoutAuthForm,
+    LayoutMain,
+    LayoutSideBar,
+    Loader,
+    UserIcon,
 } from "./ui";
 export { httpService, localStorageService, authService } from "./api";
-export { history, convertDateToNumber, formateAmount, convertDateToString } from "./lib";
+export { history, convertDateToNumber, formateAmount, convertDateToString, parseYupError } from "./lib";
 export { default as config } from "./config/config.json";

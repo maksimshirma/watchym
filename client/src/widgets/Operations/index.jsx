@@ -1,64 +1,65 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { OperationsList, operationsModel } from "../../entities";
-import {
-    modalModel,
-    CreateOperationForm,
-    EditOperationForm,
-    FilterOperations,
-    analyticsHelpers,
-    ChangeMonth,
-} from "../../features";
-import { Button } from "../../shared";
+import { CreateOperationForm, EditOperationForm, FilterOperations, useFilter, useModal } from "../../features";
+import { Button, Loader, PageHeader } from "../../shared";
 
 const Operations = () => {
-    const dispatch = useDispatch();
+    const { setConfig, filter, config } = useFilter();
+    const { openModal } = useModal();
+
     const operations = useSelector(operationsModel.getOperationsList());
     const operationsDataStatus = useSelector(operationsModel.getOperationsDataStatus());
 
-    const [startDate, setStartDate] = useState(analyticsHelpers.getStart());
-    const [endDate, setEndDate] = useState(analyticsHelpers.getEnd());
-
-    const [filter, setFilter] = useState({
-        account: "",
-        type: "",
-    });
+    const handleFilter = () => {
+        openModal(
+            <FilterOperations
+                options={{
+                    account: true,
+                    type: true,
+                    category: true,
+                    startDate: true,
+                    endDate: true,
+                }}
+                setConfig={setConfig}
+                config={config}
+            />
+        );
+    };
 
     const handleCreate = () => {
-        dispatch(modalModel.handleOpenModal(<CreateOperationForm />));
+        openModal(<CreateOperationForm />);
     };
 
     const handleEdit = (id) => {
-        dispatch(modalModel.handleOpenModal(<EditOperationForm _id={id} />));
+        openModal(<EditOperationForm _id={id} />);
     };
 
     if (operationsDataStatus) {
-        const operationsSortedByDate = analyticsHelpers.filterOperationsByDate(operations, startDate, endDate);
         return (
-            <div className="w-full h-full flex flex-col">
-                <div className="w-1/3 py-2 mx-auto">
-                    <ChangeMonth
-                        startDate={startDate}
-                        endDate={endDate}
-                        setStartDate={setStartDate}
-                        setEndDate={setEndDate}
-                    />
-                </div>
+            <div className="w-full h-[calc(100%-34px)] flex flex-col p-1">
+                <PageHeader>История</PageHeader>
                 <div className="flex flex-row">
                     <div className="mr-1">
-                        <FilterOperations onFilter={setFilter} />
+                        <Button title={"Фильтры"} onClick={handleFilter} />
+                    </div>
+                    <div className="mr-1">
+                        <Button title={"Сбросить"} onClick={() => setConfig(null)} />
                     </div>
                     <div className="">
                         <Button title={"Добавить"} onClick={handleCreate} />
                     </div>
                 </div>
-                <div className="w-full h-full mt-1 overflow-y-auto">
-                    <OperationsList sortedOperations={operationsSortedByDate} filter={filter} onEdit={handleEdit} />
+                <div className="w-full mt-1 overflow-y-auto">
+                    <OperationsList sortedOperations={filter(operations)} onEdit={handleEdit} />
                 </div>
             </div>
         );
     }
-    return "Loading...";
+    return (
+        <div className="flex justify-center items-center">
+            <Loader />
+        </div>
+    );
 };
 
 export default Operations;

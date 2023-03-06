@@ -2,13 +2,12 @@ import PropTypes from "prop-types";
 import Operation from "../Operation";
 import { operationsModel } from "../../model";
 import { useSelector } from "react-redux";
-import { filterOperations } from "../../lib";
 
-const OperationsList = ({ sortedOperations, filter, onEdit }) => {
+const OperationsList = ({ sortedOperations, onEdit }) => {
     const operationsList = useSelector(operationsModel.getOperationsList());
     const dataStatus = useSelector(operationsModel.getOperationsDataStatus());
     if (dataStatus) {
-        const operations = filterOperations(sortedOperations ? sortedOperations : operationsList, filter);
+        const operations = sortedOperations ? sortedOperations : operationsList;
         return (
             <>
                 {operations &&
@@ -23,7 +22,6 @@ const OperationsList = ({ sortedOperations, filter, onEdit }) => {
 
 OperationsList.propTypes = {
     sortedOperations: PropTypes.arrayOf(PropTypes.object),
-    filter: PropTypes.object,
     onEdit: PropTypes.func,
 };
 

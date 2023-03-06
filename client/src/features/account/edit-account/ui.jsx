@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { TextField, Button, SubmitButton } from "../../../shared";
+import { TextField, Button, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { accountsModel, operationsModel } from "../../../entities";
-import { modalModel } from "../../modal";
+import { useModal } from "../../modal";
 import { validationSchema } from "../lib";
-import { parseYupError } from "../../lib";
 
 const EditAccountForm = ({ _id }) => {
     const dispatch = useDispatch();
+    const { closeModal } = useModal();
     const account = useSelector(accountsModel.getAccountById(_id));
     const operations = useSelector(operationsModel.getOperationsList());
 
@@ -42,7 +42,7 @@ const EditAccountForm = ({ _id }) => {
             };
 
             dispatch(accountsModel.updateAccount(newData));
-            dispatch(modalModel.handleCloseModal());
+            closeModal();
         }
     };
 
@@ -62,15 +62,11 @@ const EditAccountForm = ({ _id }) => {
             if (operation.account === _id) dispatch(operationsModel.deleteOperation(operation._id));
         });
         dispatch(accountsModel.deleteAccount(_id));
-        dispatch(modalModel.handleCloseModal());
-    };
-
-    const handleCancel = () => {
-        dispatch(modalModel.handleCloseModal());
+        closeModal();
     };
 
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center text-xs sm:text-sm lg:text-base">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col text-xs sm:text-sm lg:text-base">
             <TextField
                 label={"Название счёта:"}
                 type={"text"}
@@ -95,14 +91,11 @@ const EditAccountForm = ({ _id }) => {
                 onChange={handleChange}
                 error={errors.amount}
             />
-            <div className="w-full flex flex-row">
-                <div className="flex-auto text-center">
+            <div className="flex">
+                <div className="mr-1">
                     <SubmitButton title={"Принять"} />
                 </div>
-                <div className="flex-auto text-center">
-                    <Button title={"Отмена"} onClick={handleCancel} />
-                </div>
-                <div className="flex-auto text-center">
+                <div>
                     <Button title={"Удалить"} onClick={handleDelete} />
                 </div>
             </div>

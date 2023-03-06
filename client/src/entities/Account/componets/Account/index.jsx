@@ -12,15 +12,15 @@ const Account = ({ _id, onEdit }) => {
     return (
         <div
             role={"presentation"}
-            className="w-full mb-1 flex items-center text-xs sm:text-sm lg:text-base text-left cursor-pointer hover:bg-gray-200 hover:rounded-lg hover:p-1 transition-all"
+            className="w-full mb-1 flex items-center text-left cursor-pointer hover:bg-slate-200 hover:rounded-lg p-1 transition-all"
             onClick={handleEdit}
         >
-            <div className="w-12 h-10 bg-red-500 rounded-lg text-white text-xs flex justify-center items-end">
-                <div className="">{"***" + String(number).slice(16)}</div>
+            <div className="w-12 h-10 sm:w-16 sm:h-12 bg-red-500 rounded-lg text-white text-xs sm:text-sm flex justify-center items-end">
+                <div>{"***" + String(number).slice(16)}</div>
             </div>
-            <div className="ml-2">
-                <div className="">{name}</div>
-                <div className="text-sm flex flex-row">
+            <div className="ml-2 text-sm sm:text-lg">
+                <div>{name}</div>
+                <div>
                     <FormatedAmount amount={amount} />
                 </div>
             </div>

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { TextField, SubmitButton } from "../../../shared";
+import { TextField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
-import { parseYupError } from "../../lib";
 import { getErrorMessage } from "../lib";
 import * as yup from "yup";
 

@@ -4,7 +4,7 @@ const LayoutAuthForm = ({ children }) => {
     return (
         <div className="w-full h-full grid justify-items-center content-center">
             <div className="w-1/2 h-fit mb-20">
-                <div className="border-[1px] rounded-lg p-10 shadow-xl">{children}</div>
+                <div className="border-[1px] border-black rounded-lg bg-slate-100 p-10 shadow-xl">{children}</div>
             </div>
         </div>
     );

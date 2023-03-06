@@ -1,15 +1,16 @@
-import { LayoutMain, PageHeader } from "../../shared";
+import { Layout, LayoutSideBar, LayoutMain } from "../../shared";
 import { Accounts, Analytics } from "../../widgets";
 
 const AnalyticsPage = () => {
     return (
-        <LayoutMain>
-            <Accounts />
-            <div className="w-full h-full">
-                <PageHeader>Аналитика</PageHeader>
+        <Layout>
+            <LayoutSideBar>
+                <Accounts />
+            </LayoutSideBar>
+            <LayoutMain>
                 <Analytics />
-            </div>
-        </LayoutMain>
+            </LayoutMain>
+        </Layout>
     );
 };
 

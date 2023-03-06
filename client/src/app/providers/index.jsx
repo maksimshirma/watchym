@@ -3,13 +3,16 @@ import RouterWrapper from "./with-router.jsx";
 import StrictModeWrapper from "./with-strict-mode.jsx";
 import StoreWrapper from "./with-store.jsx";
 import AppLoaderWrapper from "./with-app-loader.jsx";
+import ModalWrapper from "./with-modal.jsx";
 
 const ProvidersWrapper = ({ children }) => {
     return (
         <StoreWrapper>
             <AppLoaderWrapper>
                 <RouterWrapper>
-                    <StrictModeWrapper>{children}</StrictModeWrapper>
+                    <StrictModeWrapper>
+                        <ModalWrapper>{children}</ModalWrapper>
+                    </StrictModeWrapper>
                 </RouterWrapper>
             </AppLoaderWrapper>
         </StoreWrapper>

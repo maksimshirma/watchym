@@ -1,6 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import operationsService from "../api";
-// import { filterOperations } from "../lib";
+import { accountsModel } from "../../Account";
 
 export const operationsSlice = createSlice({
     name: "operations",
@@ -72,6 +72,7 @@ export const createOperation = (payload) => async (dispatch) => {
     dispatch(operationCreateRequested());
     try {
         const content = await operationsService.create(payload);
+        dispatch(accountsModel.loadAccountsList());
         dispatch(operationCreated(content));
     } catch (error) {
         dispatch(operationCreateFailed(error.message));
@@ -82,6 +83,7 @@ export const updateOperation = (payload) => async (dispatch) => {
     dispatch(operationUpdateRequested());
     try {
         const content = await operationsService.update(payload);
+        dispatch(accountsModel.loadAccountsList());
         dispatch(operationUpdated(content));
     } catch (error) {
         dispatch(operationUpdateFailed());
@@ -92,7 +94,8 @@ export const deleteOperation = (id) => async (dispatch) => {
     dispatch(operationDeleteRequested());
     try {
         const content = await operationsService.delete(id);
-        if (content === null) {
+        if (!content) {
+            dispatch(accountsModel.loadAccountsList());
             dispatch(operationDeleted(id));
         }
     } catch (e) {

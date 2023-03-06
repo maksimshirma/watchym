@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Button = ({ title, onClick }) => {
     return (
         <button
-            className="h-7 px-4 align-middle bg-[#e5e7eb] hover:bg-[#97989b] duration-100 rounded-xl text-xs sm:text-sm lg:text-base"
+            className="h-7 px-4 align-middle bg-slate-100 hover:bg-slate-200 border-black border-[1px] rounded-lg duration-100 text-xs sm:text-sm lg:text-base"
             onClick={onClick}
         >
             {title}

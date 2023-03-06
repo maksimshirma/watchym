@@ -1,1 +1,1 @@
-export * as modalModel from "./model.js";
+export { useModal, ModalProvider } from "./useModal.jsx";

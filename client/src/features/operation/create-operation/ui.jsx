@@ -3,19 +3,19 @@ import {
     TextField,
     SelectField,
     convertDateToNumber,
-    Button,
     convertDateToString,
     SubmitButton,
+    parseYupError,
 } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { accountsModel, operationsModel, categoriesModel } from "../../../entities";
-import { modalModel } from "../../../features";
-import { parseYupError } from "../../lib";
+import { useModal } from "../../../features";
 import { validationSchema } from "../lib";
 
 const CreateOperationForm = () => {
     const dispatch = useDispatch();
+    const { closeModal } = useModal();
     const accounts = useSelector(accountsModel.getAccountsList());
     const categories = useSelector(categoriesModel.getCategoriesList());
 
@@ -49,10 +49,8 @@ const CreateOperationForm = () => {
                 account: data.account,
                 category: data.type === "income" ? "" : data.category,
             };
-            const account = accounts.find((account) => account._id === newData.account);
-            dispatch(accountsModel.operateAccount(newData, account));
             dispatch(operationsModel.createOperation(newData));
-            dispatch(modalModel.handleCloseModal());
+            closeModal();
         }
     };
 
@@ -66,10 +64,6 @@ const CreateOperationForm = () => {
             });
         // eslint-disable-next-line
     }, [data]);
-
-    const handleCancel = () => {
-        dispatch(modalModel.handleCloseModal());
-    };
 
     if (accounts.length === 0) {
         return "У вас нет счетов.";
@@ -122,13 +116,8 @@ const CreateOperationForm = () => {
                     onChange={handleChange}
                     error={errors.date}
                 />
-                <div className="w-full flex flex-row">
-                    <div className="w-1/2 text-center">
-                        <SubmitButton title={"Принять"} />
-                    </div>
-                    <div className="w-1/2 text-center">
-                        <Button title={"Отмена"} onClick={handleCancel} />
-                    </div>
+                <div className="w-full">
+                    <SubmitButton title={"Принять"} />
                 </div>
             </form>
         );

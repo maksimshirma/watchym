@@ -13,6 +13,12 @@ const SelectField = ({ label, name, value, onChange, options, error }) => {
             ? options
             : options.map((option) => ({ label: option.name, value: option._id }));
 
+    const convertedValue = value
+        ? value.label && value.value
+            ? value
+            : { label: value.name, value: value._id }
+        : null;
+
     return (
         <div className="w-full mb-3">
             <label className="form-label" htmlFor={name}>
@@ -23,9 +29,9 @@ const SelectField = ({ label, name, value, onChange, options, error }) => {
                 id={name}
                 name={name}
                 onChange={handleChange}
-                defaultValue={"DEFAULT"}
+                defaultValue={convertedValue ? convertedValue.value : "DEFAULT"}
             >
-                {!value && (
+                {!convertedValue && (
                     <option disabled value="DEFAULT">
                         Выберите...
                     </option>

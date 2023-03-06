@@ -12,7 +12,7 @@ const GroupList = ({ items, label, valueProperty, contentProperty, onItemSelect,
     };
     if (items) {
         return (
-            <div className="w-full">
+            <div className="w-full p-2 mb-1 border-[1px] rounded-lg">
                 <button className="flex items-center w-full" onClick={handleClick}>
                     <div className="grow text-left">{label}</div>
                     <div className="w-3 h-3">{isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}</div>

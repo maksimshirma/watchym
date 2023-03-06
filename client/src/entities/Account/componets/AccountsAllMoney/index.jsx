@@ -6,12 +6,12 @@ import { FormatedAmount } from "../../../../shared";
 const AccountsAllMoney = () => {
     const accounts = useSelector(accountsModel.getAccountsList());
     const dataStatus = useSelector(accountsModel.getAccountsDataStatus());
-    const amount = getAllMoney(accounts);
     if (dataStatus) {
+        const amount = getAllMoney(accounts);
         return (
-            <div className="flex flex-col">
+            <div className="flex sm:text-2xl flex-col">
                 <FormatedAmount amount={amount} />
-                <p className="text-sm text-gray-500">{"Всего денег"}</p>
+                <p className="text-sm text-gray-500">Всего денег</p>
             </div>
         );
     }

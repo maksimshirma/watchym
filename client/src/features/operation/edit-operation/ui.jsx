@@ -7,15 +7,16 @@ import {
     convertDateToString,
     Button,
     SubmitButton,
+    parseYupError,
 } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { operationsModel, accountsModel, categoriesModel } from "../../../entities";
-import { modalModel } from "../../../features";
-import { parseYupError } from "../../lib";
+import { useModal } from "../../../features";
 import { validationSchema } from "../lib";
 
 const EditOperationForm = ({ _id }) => {
     const dispatch = useDispatch();
+    const { closeModal } = useModal();
     const accounts = useSelector(accountsModel.getAccountsList());
     const operation = useSelector(operationsModel.getOperationById(_id));
     const categories = useSelector(categoriesModel.getCategoriesList());
@@ -47,19 +48,13 @@ const EditOperationForm = ({ _id }) => {
             const newData = {
                 _id,
                 type: data.type,
-                date: data.date ?? convertDateToNumber(data.date),
+                date: typeof data.date === "string" ? convertDateToNumber(data.date) : data.date,
                 amount: data.amount ?? Number(data.amount.replaceAll(",", ".")),
                 account: data.account,
                 category: data.type === "income" ? "" : data.category,
             };
-            const account = accounts.find((account) => account._id === newData.account);
-            const newAccountAmount =
-                operation.type === "income"
-                    ? account.amount - Number(operation.amount)
-                    : account.amount + Number(operation.amount);
-            dispatch(accountsModel.operateAccount(newData, { ...account, amount: newAccountAmount }));
             dispatch(operationsModel.updateOperation(newData));
-            dispatch(modalModel.handleCloseModal());
+            closeModal();
         }
     };
 
@@ -75,18 +70,8 @@ const EditOperationForm = ({ _id }) => {
     }, [data]);
 
     const handleDelete = () => {
-        const account = accounts.find((account) => account._id === data.account);
-        const newAccountAmount =
-            operation.type === "income"
-                ? account.amount - Number(operation.amount)
-                : account.amount + Number(operation.amount);
-        dispatch(accountsModel.updateAccount({ ...account, amount: newAccountAmount }));
         dispatch(operationsModel.deleteOperation(_id));
-        dispatch(modalModel.handleCloseModal());
-    };
-
-    const handleCancel = () => {
-        dispatch(modalModel.handleCloseModal());
+        closeModal();
     };
 
     if (accounts && categories) {
@@ -142,13 +127,10 @@ const EditOperationForm = ({ _id }) => {
                     error={errors.date}
                 />
                 <div className="flex">
-                    <div className="flex-auto text-center">
+                    <div className="mr-1">
                         <SubmitButton title={"Принять"} />
                     </div>
-                    <div className="flex-auto text-center">
-                        <Button title={"Отмена"} onClick={handleCancel} />
-                    </div>
-                    <div className="flex-auto text-center">
+                    <div>
                         <Button title={"Удалить"} onClick={handleDelete} />
                     </div>
                 </div>

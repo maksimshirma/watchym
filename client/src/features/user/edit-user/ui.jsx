@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { TextField, SubmitButton, Button } from "../../../shared";
+import { TextField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
-import { parseYupError } from "../../lib";
-import { modalModel } from "../../../features";
+import { useModal } from "../../../features";
 import * as yup from "yup";
 
 const EditUserForm = () => {
     const dispatch = useDispatch();
     const user = useSelector(userModel.getUser());
+    const { closeModal } = useModal();
 
     const [data, setData] = useState({
         name: user ? user.name : "",
@@ -30,12 +30,8 @@ const EditUserForm = () => {
                 name: data.name,
             };
             dispatch(userModel.updateUser(newData));
-            dispatch(modalModel.handleCloseModal());
+            closeModal();
         }
-    };
-
-    const handleCancel = () => {
-        dispatch(modalModel.handleCloseModal());
     };
 
     const validationSchema = yup.object().shape({
@@ -63,13 +59,8 @@ const EditUserForm = () => {
                 onChange={handleChange}
                 error={errors.name}
             />
-            <div className="w-full flex flex-row">
-                <div className="flex-auto text-center">
-                    <SubmitButton title={"Принять"} />
-                </div>
-                <div className="flex-auto text-center">
-                    <Button title={"Отмена"} onClick={handleCancel} />
-                </div>
+            <div className="w-full">
+                <SubmitButton title={"Принять"} />
             </div>
         </form>
     );

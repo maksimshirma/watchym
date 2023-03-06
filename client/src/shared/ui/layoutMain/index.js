@@ -1,1 +1,1 @@
-export { default } from "./index.jsx";
+export { default as LayoutMain } from "./index.jsx";

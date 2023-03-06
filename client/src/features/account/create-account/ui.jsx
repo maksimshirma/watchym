@@ -1,15 +1,16 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { TextField, Button, SubmitButton } from "../../../shared";
+import { TextField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
 import { accountsModel } from "../../../entities";
-import { modalModel } from "../../../features";
+import { useModal } from "../../../features";
 import { validationSchema } from "../lib";
-import { parseYupError } from "../../lib";
 
 const CreateAccountForm = () => {
     const dispatch = useDispatch();
+    const { closeModal } = useModal();
+
     //prettier-ignore
     const [data, setData] = useState(
         {
@@ -37,7 +38,7 @@ const CreateAccountForm = () => {
                 amount: Number(data.amount.toString().replaceAll(",", ".")),
             };
             dispatch(accountsModel.createAccount(newData));
-            dispatch(modalModel.handleCloseModal());
+            closeModal();
         }
     };
 
@@ -52,45 +53,38 @@ const CreateAccountForm = () => {
         // eslint-disable-next-line
     }, [data]);
 
-    const handleCancel = () => {
-        dispatch(modalModel.handleCloseModal());
-    };
-
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center text-xs sm:text-sm lg:text-base">
-            <TextField
-                label={"Название счёта:"}
-                type={"text"}
-                name={"name"}
-                value={data.name}
-                onChange={handleChange}
-                error={errors.name}
-            />
-            <TextField
-                label={"Номер счёта:"}
-                type={"text"}
-                name={"number"}
-                value={String(data.number)}
-                onChange={handleChange}
-                error={errors.number}
-            />
-            <TextField
-                label={"Доступные средства:"}
-                type={"text"}
-                name={"amount"}
-                value={String(data.amount)}
-                onChange={handleChange}
-                error={errors.amount}
-            />
-            <div className="w-full flex flex-row">
-                <div className="w-1/2 text-center">
+        <div>
+            <form onSubmit={handleSubmit} className="w-full flex flex-col items-center text-xs sm:text-sm lg:text-base">
+                <TextField
+                    label={"Название счёта:"}
+                    type={"text"}
+                    name={"name"}
+                    value={data.name}
+                    onChange={handleChange}
+                    error={errors.name}
+                />
+                <TextField
+                    label={"Номер счёта:"}
+                    type={"text"}
+                    name={"number"}
+                    value={String(data.number)}
+                    onChange={handleChange}
+                    error={errors.number}
+                />
+                <TextField
+                    label={"Доступные средства:"}
+                    type={"text"}
+                    name={"amount"}
+                    value={String(data.amount)}
+                    onChange={handleChange}
+                    error={errors.amount}
+                />
+                <div className="w-full">
                     <SubmitButton title={"Принять"} />
                 </div>
-                <div className="w-1/2 text-center">
-                    <Button title={"Отмена"} onClick={handleCancel} />
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 };
 

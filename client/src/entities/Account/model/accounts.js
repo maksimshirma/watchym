@@ -87,7 +87,7 @@ export const deleteAccount = (id) => async (dispatch) => {
     dispatch(accountDeleteRequested());
     try {
         const content = await accountsService.delete(id);
-        if (content === null) {
+        if (!content) {
             dispatch(accountDeleted(id));
         }
     } catch (e) {

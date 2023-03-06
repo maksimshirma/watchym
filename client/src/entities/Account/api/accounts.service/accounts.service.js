@@ -1,13 +1,10 @@
-import { httpService, localStorageService } from "../../../../shared";
+import { httpService } from "../../../../shared";
 
 const accountEndpoint = "accounts/";
 
 const accountsService = {
     get: async () => {
-        const { data } = await httpService.get(accountEndpoint, {
-            orderBy: "userId",
-            equalTo: localStorageService.getUserId(),
-        });
+        const { data } = await httpService.get(accountEndpoint);
         return data;
     },
     create: async (payload) => {

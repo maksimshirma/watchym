@@ -1,15 +1,16 @@
-import { PageHeader, LayoutMain } from "../../shared";
+import { Layout, LayoutMain, LayoutSideBar } from "../../shared";
 import { Operations, Accounts } from "../../widgets";
 
 const HistoryPage = () => {
     return (
-        <LayoutMain>
-            <Accounts />
-            <div className="h-[85%] w-full">
-                <PageHeader>Мои операции</PageHeader>
+        <Layout>
+            <LayoutSideBar>
+                <Accounts />
+            </LayoutSideBar>
+            <LayoutMain>
                 <Operations />
-            </div>
-        </LayoutMain>
+            </LayoutMain>
+        </Layout>
     );
 };
 
