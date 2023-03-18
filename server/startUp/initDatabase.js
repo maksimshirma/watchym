@@ -1,5 +1,5 @@
 import categoriesMock from "../mock/categories.json" assert { type: 'json' };
-import {Category} from "../models/Category.js";
+import { Category } from "../models/Category.js";
 
 export const initDatabase = async () => {
     const categories = await Category.find();
