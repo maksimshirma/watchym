@@ -1,4 +1,5 @@
-export { userModel, UserNavProfile, UserLoader } from "./User";
+export { userModel, UserNavProfile, UserLoader, UserProfileIcon, UserEditProfileIcon, UserCard } from "./User";
 export { accountsModel, AccountsLoader, AccountsList, AccountsAllMoney, AddAccountIcon } from "./Account";
 export { OperationsList, operationsModel, OperationsLoader, operationsHelpers } from "./Operations";
-export { CategoriesLoader, categoriesModel } from "./Categories";
+export { CategoriesLoader, categoriesModel, CategoriesList } from "./Categories";
+export { ExpenseBar, SummaryAmount, GraphBar } from "./Analytics";

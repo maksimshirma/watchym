@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import { Navigation, LayoutNavbar } from "../../shared";
 import { useSelector } from "react-redux";
-import { userModel, UserNavProfile } from "../../entities";
+import { userModel, UserNavProfile, UserEditProfileIcon } from "../../entities";
 import { changeRoutesWithIsLoggedIn } from "./lib";
-import { useModal, EditUserForm } from "../../features";
 import { Link } from "react-router-dom";
+import { EditUserForm, useModal } from "../../features";
 
 const Navbar = ({ routes }) => {
-    const { openModal } = useModal();
     const isLoggedIn = useSelector(userModel.getIsLoggedIn());
     const navLinks = changeRoutesWithIsLoggedIn(routes, isLoggedIn);
+    const { openModal } = useModal();
     return (
         <>
             {isLoggedIn && (
@@ -22,8 +22,9 @@ const Navbar = ({ routes }) => {
                             </div>
                         </div>
                         <div className="w-1/4 flex justify-end items-center">
-                            <div role={"presentation"} onClick={() => openModal(<EditUserForm />)}>
-                                <UserNavProfile />
+                            <UserNavProfile />
+                            <div className="ml-2" role={"presentation"} onClick={() => openModal(<EditUserForm />)}>
+                                <UserEditProfileIcon />
                             </div>
                             <Link
                                 className="ml-2 px-2 border-[1px] bg-slate-200 border-black hover:bg-slate-300 transition-all"

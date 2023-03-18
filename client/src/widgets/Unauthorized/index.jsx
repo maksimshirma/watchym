@@ -17,7 +17,7 @@ const Unauthorized = () => {
                         className="w-fit cursor-pointer text-black transition-all"
                         onClick={() => setParam((prevState) => !prevState)}
                     >
-                        Зарегистрируйтесь!
+                        Зарегистрироваться
                     </b>
                 </p>
             </LayoutAuthForm>
@@ -35,7 +35,7 @@ const Unauthorized = () => {
                             className="w-fit cursor-pointer text-black transition-all"
                             onClick={() => setParam((prevState) => !prevState)}
                         >
-                            Войдите!
+                            Войти
                         </b>
                     </p>
                 </div>

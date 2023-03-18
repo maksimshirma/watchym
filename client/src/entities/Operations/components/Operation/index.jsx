@@ -20,10 +20,9 @@ const Operation = ({ _id, onEdit }) => {
         <div
             role={"presentation"}
             onClick={handleEdit}
-            className="w-full flex items-center text-xs sm:text-sm lg:text-base cursor-pointer hover:bg-slate-200 p-1 hover:rounded-lg transition-all"
+            className="w-full flex items-center text-xs sm:text-sm lg:text-base cursor-pointer hover:bg-slate-200 p-1 border mb-1 rounded-lg transition-all"
         >
             <div className="flex flex-row justify-center items-center">
-                <div className="w-12 h-12 rounded-lg bg-orange-200"></div>
                 <div className="ml-2">
                     <div className="">{accountName}</div>
                     <div className="text-[12px] text-gray-400">

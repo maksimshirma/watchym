@@ -1,28 +1,12 @@
 import PropTypes from "prop-types";
-import { addMonth, reduceMonth, getStringMonth, getEnd } from "../lib";
+import { useDate } from "../lib";
 import { LeftArrowIcon, RightArrowIcon } from "../../../shared";
 
-const ChangeMonth = ({ startDate, endDate, setStartDate, setEndDate }) => {
-    const setNextMonth = () => {
-        if (new Date(endDate).getFullYear() === new Date(getEnd()).getFullYear()) {
-            if (new Date(endDate).getMonth() < new Date(getEnd()).getMonth()) {
-                setStartDate((prevState) => addMonth(prevState));
-                setEndDate((prevState) => addMonth(prevState));
-            }
-        } else if (new Date(endDate).getFullYear() < new Date(getEnd()).getFullYear()) {
-            setStartDate((prevState) => addMonth(prevState));
-            setEndDate((prevState) => addMonth(prevState));
-        }
-    };
-
-    const setPrevMonth = () => {
-        setStartDate((prevState) => reduceMonth(prevState));
-        setEndDate((prevState) => reduceMonth(prevState));
-    };
-
+const ChangeMonth = ({ startDate, setPrevMonth, setNextMonth, ...props }) => {
+    const { getStringMonth } = useDate();
     const currentMonth = getStringMonth(new Date(startDate));
     return (
-        <div className="w-full flex flex-row">
+        <div className="w-full flex flex-row" style={{ ...props }}>
             <div
                 role={"presentation"}
                 className="w-5 relative rounded-lg cursor-pointer hover:bg-gray-200"
@@ -50,9 +34,8 @@ const ChangeMonth = ({ startDate, endDate, setStartDate, setEndDate }) => {
 
 ChangeMonth.propTypes = {
     startDate: PropTypes.number,
-    endDate: PropTypes.number,
-    setStartDate: PropTypes.func,
-    setEndDate: PropTypes.func,
+    setPrevMonth: PropTypes.func,
+    setNextMonth: PropTypes.func,
 };
 
 export default ChangeMonth;
