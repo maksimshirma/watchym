@@ -1,15 +1,11 @@
-import { Layout, LayoutSideBar, LayoutMain } from "../../shared";
+import { Layout } from "../../shared";
 import { Accounts, Analytics } from "../../widgets";
 
 const AnalyticsPage = () => {
     return (
         <Layout>
-            <LayoutSideBar>
-                <Accounts />
-            </LayoutSideBar>
-            <LayoutMain>
-                <Analytics />
-            </LayoutMain>
+            <Accounts />
+            <Analytics />
         </Layout>
     );
 };

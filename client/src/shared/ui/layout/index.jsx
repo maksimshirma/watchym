@@ -1,12 +1,20 @@
 import { Children } from "react";
 import PropTypes from "prop-types";
+import LayoutMain from "../layoutMain";
+import LayoutSideBar from "../layoutSideBar";
 
 const Layout = ({ children }) => {
-    const [first, ...tail] = Children.toArray(children);
+    const childrenArray = Children.toArray(children);
+    const [first, ...tail] = childrenArray;
     return (
         <div className="w-full h-[calc(100vh-150px)] flex">
-            <div className="w-1/4 h-full min-w-fit">{first}</div>
-            <div className="grow h-full">{tail}</div>
+            {childrenArray.length === 1 && <LayoutMain>{first}</LayoutMain>}
+            {childrenArray.length > 1 && (
+                <>
+                    <LayoutSideBar>{first}</LayoutSideBar>
+                    <LayoutMain>{tail}</LayoutMain>
+                </>
+            )}
         </div>
     );
 };

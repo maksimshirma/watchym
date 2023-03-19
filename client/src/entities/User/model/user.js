@@ -1,6 +1,7 @@
 import { createSlice, createAction } from "@reduxjs/toolkit";
 import { authService, localStorageService } from "../../../shared";
 import userService from "../api";
+import { toast } from "react-toastify";
 
 const accessToken = localStorageService.getAccessToken();
 
@@ -115,8 +116,10 @@ export const updateUser = (payload) => async (dispatch) => {
     dispatch(userUpdateRequested());
     try {
         const data = await userService.edit(payload);
+        toast.success("Данные успешно обновлены!");
         dispatch(userUpdated(data));
     } catch (error) {
+        toast.error(error.message);
         dispatch(userUpdateFailed());
     }
 };

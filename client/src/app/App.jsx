@@ -3,6 +3,8 @@ import { Routing, routes } from "../pages";
 import { Navbar, Modal } from "../widgets";
 import ProvidersWrapper from "./providers/index.jsx";
 import { Container } from "../shared";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => (
     <ProvidersWrapper>
@@ -11,6 +13,7 @@ const App = () => (
             <Routing />
         </Container>
         <Modal />
+        <ToastContainer />
     </ProvidersWrapper>
 );
 

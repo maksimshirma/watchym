@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const LayoutMain = ({ children, ...props }) => {
     return (
-        <div className="w-full h-full px-1" style={{ ...props }}>
+        <div className="h-full grow px-1" style={{ ...props }}>
             <div className="w-full h-full bg-slate-100 rounded-xl shadow-sm">{children}</div>
         </div>
     );

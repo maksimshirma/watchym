@@ -1,6 +1,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import operationsService from "../api";
 import { accountsModel } from "../../Account";
+import { toast } from "react-toastify";
 
 export const operationsSlice = createSlice({
     name: "operations",
@@ -72,9 +73,11 @@ export const createOperation = (payload) => async (dispatch) => {
     dispatch(operationCreateRequested());
     try {
         const content = await operationsService.create(payload);
+        toast.success("Операция успешно создана!");
         dispatch(accountsModel.loadAccountsList());
         dispatch(operationCreated(content));
     } catch (error) {
+        toast.error(error.message);
         dispatch(operationCreateFailed(error.message));
     }
 };
@@ -83,9 +86,11 @@ export const updateOperation = (payload) => async (dispatch) => {
     dispatch(operationUpdateRequested());
     try {
         const content = await operationsService.update(payload);
+        toast.success("Операция успешно обновлена!");
         dispatch(accountsModel.loadAccountsList());
         dispatch(operationUpdated(content));
     } catch (error) {
+        toast.error(error.message);
         dispatch(operationUpdateFailed());
     }
 };
@@ -95,10 +100,12 @@ export const deleteOperation = (id) => async (dispatch) => {
     try {
         const content = await operationsService.delete(id);
         if (!content) {
+            toast.success("Операция успешно удалена!");
             dispatch(accountsModel.loadAccountsList());
             dispatch(operationDeleted(id));
         }
-    } catch (e) {
+    } catch (error) {
+        toast.error(error.message);
         dispatch(operationDeleteFailed());
     }
 };

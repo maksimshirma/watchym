@@ -1,5 +1,6 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import accountsService from "../api";
+import { toast } from "react-toastify";
 
 export const accountsSlice = createSlice({
     name: "accounts",
@@ -67,8 +68,10 @@ export const createAccount = (payload) => async (dispatch) => {
     dispatch(accountCreateRequested());
     try {
         const content = await accountsService.create(payload);
+        toast.success("Счёт успешно создан!");
         dispatch(accountCreated(content));
     } catch (error) {
+        toast.error(error.message);
         dispatch(accountCreateFailed(error.message));
     }
 };
@@ -77,8 +80,10 @@ export const updateAccount = (payload) => async (dispatch) => {
     dispatch(accountUpdateRequested());
     try {
         const content = await accountsService.update(payload);
+        toast.success("Счёт успешно обновлён!");
         dispatch(accountUpdated(content));
     } catch (error) {
+        toast.error(error.message);
         dispatch(accountUpdateFailed());
     }
 };
@@ -88,9 +93,11 @@ export const deleteAccount = (id) => async (dispatch) => {
     try {
         const content = await accountsService.delete(id);
         if (!content) {
+            toast.success("Счёт успешно удалён!");
             dispatch(accountDeleted(id));
         }
-    } catch (e) {
+    } catch (error) {
+        toast.error(error.message);
         dispatch(accountDeleteFailed());
     }
 };
