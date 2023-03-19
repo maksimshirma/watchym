@@ -24,7 +24,7 @@ const Accounts = () => {
                 <>
                     <AccountsAllMoney marginLeft={"8px"} />
                     <PageHeader>Счета</PageHeader>
-                    <AccountsList accounts={accounts} onEdit={handleEdit} height={"fit-content"} maxHeight={"67%"} />
+                    <AccountsList accounts={accounts} onClick={handleEdit} height={"fit-content"} maxHeight={"67%"} />
                     <PageHeader>Добавить счёт</PageHeader>
                     <AddAccountIcon onCreate={handleCreate} marginLeft={"8px"} />
                 </>

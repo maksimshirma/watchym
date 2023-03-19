@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import Account from "../Account";
 
-const AccountsList = ({ accounts, onEdit, ...props }) => {
+const AccountsList = ({ accounts, onClick, ...props }) => {
     return (
         <div className="w-full overflow-y-auto" style={{ ...props }}>
-            {accounts && accounts.map((account) => <Account key={account._id} _id={account._id} onEdit={onEdit} />)}
+            {accounts && accounts.map((account) => <Account key={account._id} _id={account._id} onClick={onClick} />)}
         </div>
     );
 };
 
 AccountsList.propTypes = {
     accounts: PropTypes.arrayOf(PropTypes.object),
-    onEdit: PropTypes.func,
+    onClick: PropTypes.func,
 };
 
 export default AccountsList;

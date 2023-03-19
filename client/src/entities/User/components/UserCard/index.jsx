@@ -10,10 +10,10 @@ const UserCard = ({ ...props }) => {
             <div className="mt-10">
                 <UserProfileIcon />
             </div>
-            <div className="w-1/2 text-xl mt-3">
-                Имя: {userDataStatus ? user.name : "..."}
+            <div className="w-full text-center text-sm sm:text-lg lg:text-xl mt-3">
+                {userDataStatus ? user.name : "..."}
                 <br />
-                Email: {userDataStatus ? user.email : "..."}
+                {userDataStatus ? user.email : "..."}
             </div>
         </div>
     );

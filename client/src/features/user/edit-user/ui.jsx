@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TextField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
-import { useModal, UploadAvatar } from "../../../features";
+import { useModal } from "../../../features";
 import * as yup from "yup";
 
 const EditUserForm = () => {
@@ -59,7 +59,6 @@ const EditUserForm = () => {
                 onChange={handleChange}
                 error={errors.name}
             />
-            <UploadAvatar />
             <div className="w-full">
                 <SubmitButton title={"Принять"} />
             </div>

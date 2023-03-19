@@ -28,87 +28,94 @@ const Analytics = () => {
         const sum = expenseSum + incomeSum;
         return (
             <div className="w-full h-[calc(100%-34px)] p-1">
-                <PageHeader>Аналитика</PageHeader>
-                <div className="flex flex-row pb-2">
-                    <Button
-                        title={"Фильтры"}
-                        onClick={() =>
-                            openModal(
-                                <FilterOperations
-                                    options={{
-                                        account: true,
-                                        type: true,
-                                    }}
-                                    setConfig={setConfig}
-                                    config={config}
+                <div className="flex flex-col h-full w-full">
+                    <PageHeader>Аналитика</PageHeader>
+                    <div className="flex flex-row pb-2">
+                        <Button
+                            title={"Фильтры"}
+                            onClick={() =>
+                                openModal(
+                                    <FilterOperations
+                                        options={{
+                                            account: true,
+                                            type: true,
+                                        }}
+                                        setConfig={setConfig}
+                                        config={config}
+                                    />
+                                )
+                            }
+                            marginRight={"5px"}
+                        />
+                        <Button title={"Доходы"} onClick={() => setConfig({ type: "income" })} marginRight={"5px"} />
+                        <Button title={"Расходы"} onClick={() => setConfig({ type: "expense" })} marginRight={"5px"} />
+                        <Button title={"Сбросить"} onClick={() => setConfig(null)} marginRight={"5px"} />
+                    </div>
+                    <div className="grid justify-items-center items-center bg-gray-300 rounded-lg">
+                        <ChangeMonth
+                            startDate={startDate}
+                            endDate={endDate}
+                            setNextMonth={setNextMonth}
+                            setPrevMonth={setPrevMonth}
+                            width={"25%"}
+                            padding={"10px 0px"}
+                        />
+                        {(!config || config.type === undefined) && (
+                            <>
+                                <SummaryAmount sum={expenseSum} title={"Расходы"} marginBottom={"10px"} width={"90%"} />
+                                <GraphBar
+                                    sideSum={expenseSum}
+                                    mainSum={sum}
+                                    color={"red"}
+                                    marginBottom={"10px"}
+                                    width={"90%"}
                                 />
-                            )
-                        }
-                        marginRight={"5px"}
-                    />
-                    <Button title={"Доходы"} onClick={() => setConfig({ type: "income" })} marginRight={"5px"} />
-                    <Button title={"Расходы"} onClick={() => setConfig({ type: "expense" })} marginRight={"5px"} />
-                    <Button title={"Сбросить"} onClick={() => setConfig(null)} marginRight={"5px"} />
-                </div>
-                <div className="grid justify-items-center items-center bg-gray-300 rounded-lg">
-                    <ChangeMonth
-                        startDate={startDate}
-                        endDate={endDate}
-                        setNextMonth={setNextMonth}
-                        setPrevMonth={setPrevMonth}
-                        width={"25%"}
-                        padding={"10px 0px"}
-                    />
-                    {(!config || config.type === undefined) && (
-                        <>
-                            <SummaryAmount sum={expenseSum} title={"Расходы"} marginBottom={"10px"} width={"90%"} />
-                            <GraphBar
-                                sideSum={expenseSum}
-                                mainSum={sum}
-                                color={"red"}
-                                marginBottom={"10px"}
-                                width={"90%"}
-                            />
-                            <SummaryAmount sum={incomeSum} title={"Доходы"} marginBottom={"10px"} width={"90%"} />
-                            <GraphBar
-                                sideSum={incomeSum}
-                                mainSum={sum}
-                                color={"green"}
-                                marginBottom={"10px"}
-                                width={"90%"}
-                            />
-                        </>
-                    )}
+                                <SummaryAmount sum={incomeSum} title={"Доходы"} marginBottom={"10px"} width={"90%"} />
+                                <GraphBar
+                                    sideSum={incomeSum}
+                                    mainSum={sum}
+                                    color={"green"}
+                                    marginBottom={"10px"}
+                                    width={"90%"}
+                                />
+                            </>
+                        )}
+                        {config && config.type === "expense" && (
+                            <>
+                                <SummaryAmount sum={expenseSum} title={"Расходы"} marginBottom={"10px"} width={"90%"} />
+                                <ExpenseBar
+                                    sum={expenseSum}
+                                    amountPerCategory={amountPerCategory}
+                                    marginBottom={"10px"}
+                                    width={"90%"}
+                                />
+                            </>
+                        )}
+                        {config && config.type === "income" && (
+                            <>
+                                <SummaryAmount sum={incomeSum} title={"Доходы"} marginBottom={"10px"} width={"90%"} />
+                                <GraphBar
+                                    sideSum={incomeSum}
+                                    mainSum={sum}
+                                    color={"green"}
+                                    marginBottom={"10px"}
+                                    width={"90%"}
+                                />
+                            </>
+                        )}
+                    </div>
                     {config && config.type === "expense" && (
                         <>
-                            <SummaryAmount sum={expenseSum} title={"Расходы"} marginBottom={"10px"} width={"90%"} />
-                            <ExpenseBar
+                            <PageHeader>Категории</PageHeader>
+                            <CategoriesList
                                 sum={expenseSum}
                                 amountPerCategory={amountPerCategory}
-                                marginBottom={"10px"}
-                                width={"90%"}
-                            />
-                        </>
-                    )}
-                    {config && config.type === "income" && (
-                        <>
-                            <SummaryAmount sum={incomeSum} title={"Доходы"} marginBottom={"10px"} width={"90%"} />
-                            <GraphBar
-                                sideSum={incomeSum}
-                                mainSum={sum}
-                                color={"green"}
-                                marginBottom={"10px"}
-                                width={"90%"}
+                                height={"content-fit"}
+                                maxHeight={"60%"}
                             />
                         </>
                     )}
                 </div>
-                {config && config.type === "expense" && (
-                    <>
-                        <PageHeader>Категории</PageHeader>
-                        <CategoriesList sum={expenseSum} amountPerCategory={amountPerCategory} />
-                    </>
-                )}
             </div>
         );
     }

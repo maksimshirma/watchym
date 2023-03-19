@@ -23,11 +23,11 @@ const Navbar = ({ routes }) => {
                         </div>
                         <div className="w-1/4 flex justify-end items-center">
                             <UserNavProfile />
-                            <div className="ml-2" role={"presentation"} onClick={() => openModal(<EditUserForm />)}>
+                            <div className="ml-1" role={"presentation"} onClick={() => openModal(<EditUserForm />)}>
                                 <UserEditProfileIcon />
                             </div>
                             <Link
-                                className="ml-2 px-2 border-[1px] bg-slate-200 border-black hover:bg-slate-300 transition-all"
+                                className="ml-1 px-2 border-[1px] bg-slate-200 border-black hover:bg-slate-300 transition-all"
                                 to={routes.signOut.path}
                             >
                                 {routes.signOut.title}

@@ -33,7 +33,7 @@ export const Routing = () => {
             </Route>
             <Route element={<ProtectedLoggedInRoutes isLoggedIn={isLoggedIn} />}>
                 {Object.keys(routes).map((key) => {
-                    if (key !== "signUp" && key !== "signIn" && key !== "unauthorized") {
+                    if (key !== "unauthorized") {
                         return <Route key={routes[key].title} path={routes[key].path} element={routes[key].element} />;
                     }
                 })}

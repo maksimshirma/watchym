@@ -17,7 +17,7 @@ const ChangeMonth = ({ startDate, setPrevMonth, setNextMonth, ...props }) => {
                 </div>
             </div>
             <div className="grow text-center">
-                <h1 className="text-2xl px-1">{currentMonth}</h1>
+                <h1 className="text-lg lg:text-2xl px-1">{currentMonth}</h1>
             </div>
             <div
                 role={"presentation"}

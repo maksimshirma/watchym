@@ -114,21 +114,18 @@ export const getOperationsList = () => (state) => {
     return [];
 };
 
-export const getIncomeOperationsList = () => (state) => {
-    return state.operations.entities
-        ? state.operations.entities.filter((operation) => operation.type === "income")
-        : null;
-};
-
-export const getExpenseOperationsList = () => (state) => {
-    return state.operations.entities
-        ? state.operations.entities.filter((operation) => operation.type === "expense")
-        : null;
-};
-
 export const getOperationById = (id) => (state) => {
     if (id) {
         return state.operations.entities ? state.operations.entities.find((operation) => operation._id === id) : null;
+    }
+    return null;
+};
+
+export const getOperationsByAccountId = (id) => (state) => {
+    if (id) {
+        return state.operations.entities
+            ? state.operations.entities.filter((operation) => operation.account === id)
+            : null;
     }
     return null;
 };

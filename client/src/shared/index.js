@@ -28,6 +28,7 @@ export {
     Loader,
     UserIcon,
     EditUserIcon,
+    DownloadIcon,
 } from "./ui";
 export { httpService, localStorageService, authService } from "./api";
 export { history, convertDateToNumber, formateAmount, convertDateToString, parseYupError } from "./lib";

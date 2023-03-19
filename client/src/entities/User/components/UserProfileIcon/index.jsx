@@ -1,13 +1,16 @@
+import PropTypes from "prop-types";
 import { UserIcon } from "../../../../shared";
 
-const UserNavProfile = ({ ...props }) => {
+const UserProfileIcon = ({ image, ...props }) => {
     return (
         <div className="w-48 h-48 rounded-full bg-slate-200 flex justify-center items-center" style={{ ...props }}>
-            <div className="w-32">
-                <UserIcon />
-            </div>
+            <div className="w-32 h-32">{image ? <img src={image} alt="" /> : <UserIcon />}</div>
         </div>
     );
 };
 
-export default UserNavProfile;
+UserProfileIcon.propTypes = {
+    image: PropTypes.string,
+};
+
+export default UserProfileIcon;

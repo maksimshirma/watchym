@@ -4,6 +4,7 @@ import NotFoundPage from "../notFoundPage/index.jsx";
 import AnalyticsPage from "../analyticsPage/index.jsx";
 import SignOutPage from "../signOutPage/index.jsx";
 import UserPage from "../userPage/index.jsx";
+import AccountPage from "../accountPage/index.jsx";
 
 export const routes = {
     authorization: {
@@ -15,6 +16,11 @@ export const routes = {
         title: "страница пользователя",
         path: "/user",
         element: <UserPage />,
+    },
+    account: {
+        title: "счёт",
+        path: "/user/:accountId",
+        element: <AccountPage />,
     },
     analytics: {
         title: "аналитика",

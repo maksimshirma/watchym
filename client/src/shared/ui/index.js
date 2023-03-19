@@ -27,3 +27,4 @@ export { default as LayoutSideBar } from "./layoutSideBar";
 export { default as Loader } from "./loader";
 export { default as UserIcon } from "./user.icon";
 export { default as EditUserIcon } from "./editUser.icon";
+export { default as DownloadIcon } from "./download.icon";
