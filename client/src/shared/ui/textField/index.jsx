@@ -28,8 +28,6 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                     value={value}
                     className={`form-control ${getClasses}`}
                     autoComplete="off"
-                    // onFocus={this.removeAttribute("readOnly")}
-                    // onTouchStart={this.removeAttribute("readOnly")}
                 />
                 {type === "password" && (
                     <span className="input-group-text">
