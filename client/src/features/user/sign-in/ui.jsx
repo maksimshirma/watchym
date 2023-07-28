@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { TextField, SubmitButton, parseYupError } from "../../../shared";
+import { TextField, PasswordField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
 import { getErrorMessage } from "../lib";
@@ -55,8 +55,7 @@ const AuthorizationForm = () => {
                 onChange={handleChange}
                 error={errors.email}
             />
-            <TextField
-                type={"password"}
+            <PasswordField
                 label={"Пароль:"}
                 name={"password"}
                 value={data.password}

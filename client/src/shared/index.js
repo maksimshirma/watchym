@@ -4,6 +4,7 @@ export {
     Layout,
     PageHeader,
     TextField,
+    PasswordField,
     Container,
     DropdownMenu,
     ArrowUpIcon,

@@ -58,7 +58,6 @@ const CreateAccountForm = () => {
             <form onSubmit={handleSubmit} className="w-full flex flex-col items-center text-xs sm:text-sm lg:text-base">
                 <TextField
                     label={"Название счёта:"}
-                    type={"text"}
                     name={"name"}
                     value={data.name}
                     onChange={handleChange}
@@ -66,7 +65,6 @@ const CreateAccountForm = () => {
                 />
                 <TextField
                     label={"Номер счёта:"}
-                    type={"text"}
                     name={"number"}
                     value={String(data.number)}
                     onChange={handleChange}
@@ -74,7 +72,6 @@ const CreateAccountForm = () => {
                 />
                 <TextField
                     label={"Доступные средства:"}
-                    type={"text"}
                     name={"amount"}
                     value={String(data.amount)}
                     onChange={handleChange}

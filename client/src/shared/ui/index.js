@@ -3,6 +3,7 @@ export { default as Button } from "./button";
 export { default as Layout } from "./layout";
 export { default as PageHeader } from "./pageHeader";
 export { default as TextField } from "./formFields/textField";
+export { default as PasswordField } from "./formFields/passwordField";
 export { default as Container } from "./container";
 export { default as DropdownMenu } from "./dropdownMenu";
 export { default as ArrowUpIcon } from "./icons/arrowUp.icon";

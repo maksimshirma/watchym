@@ -52,7 +52,6 @@ const EditUserForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <TextField
-                type={"text"}
                 label={"Ваше имя:"}
                 name={"name"}
                 value={data.name}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { TextField, SubmitButton, parseYupError } from "../../../shared";
+import { TextField, PasswordField, SubmitButton, parseYupError } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
 import { getErrorMessage } from "../lib";
@@ -50,15 +50,13 @@ const RegistrationForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <TextField
-                type={"text"}
                 label={"Email:"}
                 name={"email"}
                 value={data.email}
                 onChange={handleChange}
                 error={errors.email}
             />
-            <TextField
-                type={"password"}
+            <PasswordField
                 label={"Пароль:"}
                 name={"password"}
                 value={data.password}
@@ -66,7 +64,6 @@ const RegistrationForm = () => {
                 error={errors.password}
             />
             <TextField
-                type={"text"}
                 label={"Ваше имя:"}
                 name={"name"}
                 value={data.name}

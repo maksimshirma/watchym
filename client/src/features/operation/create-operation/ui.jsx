@@ -102,7 +102,6 @@ const CreateOperationForm = () => {
                 )}
                 <TextField
                     label={"Сумма:"}
-                    type={"text"}
                     name={"amount"}
                     value={String(data.amount)}
                     onChange={handleChange}
