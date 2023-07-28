@@ -1,7 +1,9 @@
 import { Children } from "react";
 import PropTypes from "prop-types";
-import LayoutMain from "../layoutMain";
-import LayoutSideBar from "../layoutSideBar";
+import LayoutMain from "./layoutMain";
+import LayoutSideBar from "./layoutSideBar";
+import LayoutAuthForm from "./layoutAuthForm";
+import LayoutNavbar from "./layoutNavbar";
 
 const Layout = ({ children }) => {
     const childrenArray = Children.toArray(children);
@@ -22,5 +24,10 @@ const Layout = ({ children }) => {
 Layout.propTypes = {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
+
+Layout.LayoutAuthForm = LayoutAuthForm;
+Layout.LayoutSideBar = LayoutSideBar;
+Layout.LayoutMain = LayoutMain;
+Layout.LayoutNavbar = LayoutNavbar;
 
 export default Layout;

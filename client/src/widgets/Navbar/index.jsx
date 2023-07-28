@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Navigation, LayoutNavbar } from "../../shared";
+import { Navigation, Layout } from "../../shared";
 import { useSelector } from "react-redux";
 import { userModel, UserNavProfile, UserEditProfileIcon } from "../../entities";
 import { changeRoutesWithIsLoggedIn } from "./lib";
@@ -13,7 +13,7 @@ const Navbar = ({ routes }) => {
     return (
         <>
             {isLoggedIn && (
-                <LayoutNavbar>
+                <Layout.LayoutNavbar>
                     <div className="flex py-2 items-center">
                         <div className="w-1/4">WYR</div>
                         <div className="grow">
@@ -34,7 +34,7 @@ const Navbar = ({ routes }) => {
                             </Link>
                         </div>
                     </div>
-                </LayoutNavbar>
+                </Layout.LayoutNavbar>
             )}
         </>
     );

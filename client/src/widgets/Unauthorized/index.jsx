@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { AuthorizationForm, RegistrationForm } from "../../features";
-import { LayoutAuthForm } from "../../shared";
+import { Layout } from "../../shared";
 
 const Unauthorized = () => {
     const [param, setParam] = useState(true);
     if (param) {
         return (
-            <LayoutAuthForm>
+            <Layout.LayoutAuthForm>
                 <div>
                     <AuthorizationForm />
                 </div>
@@ -20,12 +20,12 @@ const Unauthorized = () => {
                         Зарегистрироваться
                     </b>
                 </p>
-            </LayoutAuthForm>
+            </Layout.LayoutAuthForm>
         );
     }
     if (!param) {
         return (
-            <LayoutAuthForm>
+            <Layout.LayoutAuthForm>
                 <RegistrationForm />
                 <div>
                     <p className="pt-1">
@@ -39,7 +39,7 @@ const Unauthorized = () => {
                         </b>
                     </p>
                 </div>
-            </LayoutAuthForm>
+            </Layout.LayoutAuthForm>
         );
     }
 };

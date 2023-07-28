@@ -1,7 +1,6 @@
 export {
     Navigation,
     Button,
-    LayoutNavbar,
     Layout,
     PageHeader,
     TextField,
@@ -22,9 +21,6 @@ export {
     SubmitButton,
     LeftArrowIcon,
     RightArrowIcon,
-    LayoutAuthForm,
-    LayoutMain,
-    LayoutSideBar,
     Loader,
     UserIcon,
     EditUserIcon,

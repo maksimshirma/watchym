@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import ArrowUpIcon from "../arrowUp.icon";
-import ArrowDownIcon from "../arrowDown.icon";
-import UncheckedBox from "../uncheckedBox";
-import CheckedBox from "../checkedBox";
+import ArrowUpIcon from "../icons/arrowUp.icon";
+import ArrowDownIcon from "../icons/arrowDown.icon";
+import UncheckedBox from "../icons/uncheckedBox.icon";
+import CheckedBox from "../icons/checkedBox.icon";
 
 const GroupList = ({ items, label, valueProperty, contentProperty, onItemSelect, selectedItem }) => {
     const [isOpen, setIsOpen] = useState(false);

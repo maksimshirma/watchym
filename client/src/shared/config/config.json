@@ -1,4 +1,4 @@
 {
-    "API_BASE_URL": "http://82.148.28.180/api",
+    "API_BASE_URL": "http://localhost:8080/api",
     "isFireBase": false
 }
