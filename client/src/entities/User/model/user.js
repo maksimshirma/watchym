@@ -12,6 +12,7 @@ const initialState = accessToken
         isLoading: true,
         error: null,
         auth: { userId: accessToken },
+        authProcessing: false,
         isLoggedIn: true,
         dataLoaded: false,
     }
@@ -20,6 +21,7 @@ const initialState = accessToken
         isLoading: false,
         error: null,
         auth: null,
+        authProcessing: false,
         isLoggedIn: false,
         dataLoaded: false,
     };
@@ -44,13 +46,16 @@ export const userSlice = createSlice({
         },
         authRequested: (state) => {
             state.error = null;
+            state.authProcessing = true;
         },
         authRequestSuccessed: (state, action) => {
             state.auth = action.payload;
             state.isLoggedIn = true;
+            state.authProcessing = false;
         },
         authRequestFailed: (state, action) => {
             state.error = action.payload;
+            state.authProcessing = false;
         },
         userSignedOut: (state) => {
             state.entities = null;
@@ -89,7 +94,7 @@ export const signUp =
                 localStorageService.setTokens(data);
                 dispatch(authRequestSuccessed({ userId: data.userId }));
             } catch (error) {
-                dispatch(authRequestFailed(error.response.data.error));
+                dispatch(authRequestFailed(error.code));
             }
         };
 
@@ -103,7 +108,7 @@ export const signIn =
                 localStorageService.setTokens(data);
                 dispatch(authRequestSuccessed({ userId: data.userId }));
             } catch (error) {
-                dispatch(authRequestFailed(error.response.data.error));
+                dispatch(authRequestFailed(error.code));
             }
         };
 
@@ -138,5 +143,6 @@ export const getUser = () => (state) => state.user.entities;
 export const getIsLoggedIn = () => (state) => state.user.isLoggedIn;
 export const getUserDataStatus = () => (state) => state.user.dataLoaded;
 export const getAuthError = () => (state) => state.user.error;
+export const getAuthProcessing = () => (state) => state.user.authProcessing;
 
 export const userReducer = userSlice.reducer;

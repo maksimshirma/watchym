@@ -35,7 +35,11 @@ const EditUserForm = () => {
     };
 
     const validationSchema = yup.object().shape({
-        name: yup.string().required("Имя обязательно для заполнения").min(2, "Должно быть не менее 2 символов"),
+        name: yup
+            .string()
+            .required("Имя обязательно для заполнения")
+            .min(2, "Должно быть не менее 2 символов")
+            .max(15, "Имя не может превышать 15 символов"),
     });
 
     useEffect(() => {

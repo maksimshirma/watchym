@@ -4,6 +4,8 @@ export const useAnalytics = () => {
     };
 
     const getAmountPerCategory = (operations, categories) => {
+        if (!Array.isArray(operations) || !Array.isArray(categories)) return null;
+
         const object = {};
         operations &&
             operations.forEach((operation) => {

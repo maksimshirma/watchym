@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { TextField, PasswordField, SubmitButton, parseYupError } from "../../../shared";
+import { TextField, PasswordField, SubmitButton, useForm } from "../../../shared";
 import { useDispatch, useSelector } from "react-redux";
 import { userModel } from "../../../entities";
 import { getErrorMessage } from "../lib";
@@ -8,25 +7,11 @@ import * as yup from "yup";
 const AuthorizationForm = () => {
     const dispatch = useDispatch();
     const authError = useSelector(userModel.getAuthError());
+    const isAuthProcessing = useSelector(userModel.getAuthProcessing());
 
-    const [data, setData] = useState({
+    const initialData = {
         email: "",
         password: "",
-    });
-
-    const [errors, setErrors] = useState({});
-
-    const isValid = Object.keys(errors).length === 0;
-
-    const handleChange = ({ name, value }) => {
-        setData((prevState) => ({ ...prevState, [name]: value }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (isValid) {
-            dispatch(userModel.signIn(data));
-        }
     };
 
     const validationSchema = yup.object().shape({
@@ -34,16 +19,14 @@ const AuthorizationForm = () => {
         password: yup.string().required("Пароль обязателен для заполнения").min(8, "Должно быть не менее 8 символов"),
     });
 
-    useEffect(() => {
-        validationSchema
-            .validate(data, { abortEarly: false })
-            .then(() => setErrors({}))
-            .catch((yupError) => {
-                const errors = parseYupError(yupError);
-                setErrors(errors);
-            });
-        // eslint-disable-next-line
-    }, [data]);
+    const { data, validationErrors, isValid, handleChange } = useForm(validationSchema, initialData);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isValid) {
+            dispatch(userModel.signIn(data));
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -53,16 +36,17 @@ const AuthorizationForm = () => {
                 name={"email"}
                 value={data.email}
                 onChange={handleChange}
-                error={errors.email}
+                error={validationErrors.email}
             />
             <PasswordField
                 label={"Пароль:"}
                 name={"password"}
                 value={data.password}
                 onChange={handleChange}
-                error={errors.password}
+                error={validationErrors.password}
             />
             {authError && <p className="text-danger">{getErrorMessage(authError)}</p>}
+            {isAuthProcessing && <p className="text-info">Запрос обрабатывается...</p>}
             <SubmitButton title={"Войти"} />
         </form>
     );

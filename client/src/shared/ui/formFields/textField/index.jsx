@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const TextField = ({ label, type = "text", name, value, onChange, error }) => {
-    const getClasses = error ? " is-invalid" : "";
+    const [isShowError, setShowError] = useState(false);
 
-    const handleChange = ({ target }) => {
-        onChange({ name: target.name, value: target.value });
+    const handleChange = (event) => {
+        const target = event.target;
+        const { name, value } = target;
+        onChange({ name, value });
+        setShowError(false);
+        let max = window.setTimeout(() => {
+            return null;
+        }, 0);
+        while (max--) {
+            clearTimeout(max);
+        }
+        setTimeout(() => {
+            setShowError(true);
+        }, 1000);
+    };
+
+    const handleBlur = () => {
+        setShowError(true);
+    };
+
+    const handleFocus = () => {
+        setShowError(false);
     };
 
     return (
@@ -18,10 +38,12 @@ const TextField = ({ label, type = "text", name, value, onChange, error }) => {
                     type={type}
                     onChange={handleChange}
                     value={value}
-                    className={`form-control ${getClasses}`}
+                    className={"form-control" + (isShowError && error ? " is-invalid" : "")}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
                     autoComplete="off"
                 />
-                {error && <div className="invalid-feedback">{error}</div>}
+                {error && isShowError && <div className="invalid-feedback">{error}</div>}
             </div>
         </div>
     );

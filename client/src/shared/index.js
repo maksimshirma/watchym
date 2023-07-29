@@ -28,5 +28,5 @@ export {
     DownloadIcon,
 } from "./ui";
 export { httpService, localStorageService, authService } from "./api";
-export { history, convertDateToNumber, formateAmount, convertDateToString, parseYupError } from "./lib";
+export { history, convertDateToNumber, formateAmount, convertDateToString, parseYupError, useForm } from "./lib";
 export { default as config } from "./config/config.json";
