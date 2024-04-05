@@ -52,7 +52,7 @@ Backend:
 Для того, чтобы запустить проект, необходимо склонировать репозиторий:
 
 ```
-git clone https://github.com/ChernoSlava/burgers-next.git](https://github.com/maksimshirma/watchym.git)
+git clone https://github.com/maksimshirma/watchym.git
 ```
 
 После понадобится установить зависимости:
